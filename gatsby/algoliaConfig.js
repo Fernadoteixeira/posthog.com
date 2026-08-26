@@ -1,5 +1,6 @@
 const Slugger = require('github-slugger')
 const settings = require('./algoliaSettings.json')
+const { localeForPath } = require('../src/constants/locales')
 
 // Lower values win after Algolia's textual relevance criteria tie.
 const PATH_RANKING = {
@@ -224,6 +225,7 @@ const createPageRecord = (page, content, toolPaths) => {
         id: content?.id || page.id,
         title,
         type,
+        locale: localeForPath(path).code,
         slug: path === '/' ? '' : path.slice(1),
         fields: {
             ...content?.fields,
@@ -263,6 +265,7 @@ const createTeamRecord = ({ id, name, slug, tagline, description, profiles }) =>
         id,
         title,
         type: 'company',
+        locale: localeForPath(path).code,
         slug: path.slice(1),
         fields: { slug: path },
         path_ranking: PATH_RANKING.content,
