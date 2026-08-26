@@ -34,6 +34,9 @@ interface ProductReaderViewProps {
         title?: string
         description?: string
         image?: string
+        lang?: string
+        canonicalUrl?: string
+        languageAlternates?: { hrefLang: string; href: string }[]
     }
 }
 
@@ -73,7 +76,7 @@ export default function ProductReaderView({
     productHandle,
     surface = 'product',
     seoOverrides,
-}: ProductReaderViewProps) {
+}: ProductReaderViewProps): JSX.Element {
     const productData = useProduct({ handle: productHandle }) as any
     const allProducts = useProduct() as any[]
 
@@ -109,6 +112,9 @@ export default function ProductReaderView({
                 title={seoOverrides?.title || productData?.seo?.title}
                 description={seoOverrides?.description || productData?.seo?.description}
                 image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
+                lang={seoOverrides?.lang}
+                canonicalUrl={seoOverrides?.canonicalUrl}
+                languageAlternates={seoOverrides?.languageAlternates}
             />
             <ReaderView
                 title={productData?.name}
