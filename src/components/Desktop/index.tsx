@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useLocation } from '@reach/router'
 import Link from 'components/Link'
 import { useAppActions, useAppSettings, useAppUIState } from '../../context/App'
 import { GlassIcon, PricingIcon, DemoIcon } from 'components/OSIcons'
@@ -29,6 +30,9 @@ import ReactConfetti from 'react-confetti'
 import { useToast } from '../../context/Toast'
 import { navigate } from 'gatsby'
 import useDesktopBadges from '../../hooks/useDesktopBadges'
+import { translatePtBr } from '../../pages/pt-br/_translations'
+
+const identity = (value: string): string => value
 
 interface Product {
     name: string
@@ -37,56 +41,56 @@ interface Product {
     color?: string
 }
 
-export const useProductLinks = () => {
+export const useProductLinks = (translate = identity) => {
     // Memoized: the list is static, so this avoids rebuilding the array and all the
     // icon JSX elements on every render (which also gave consumers a new identity each time).
     return React.useMemo(
         () => [
             {
-                label: 'Home',
+                label: translate('Home'),
                 Icon: <GlassIcon path={HOME_SILHOUETTE} />,
                 url: '/',
                 source: 'desktop',
             },
             {
-                label: 'Self-driving product',
+                label: translate('Self-driving product'),
                 Icon: <GlassIcon path={SELF_DRIVING_SILHOUETTE} />,
                 url: '/self-driving',
                 source: 'desktop',
             },
             {
-                label: 'Context warehouse',
+                label: translate('Context warehouse'),
                 Icon: <GlassIcon path={CONTEXT_WAREHOUSE_SILHOUETTE} />,
                 url: '/context-warehouse',
                 source: 'desktop',
             },
             {
-                label: 'Pricing',
+                label: translate('Pricing'),
                 Icon: <PricingIcon />,
                 url: '/pricing',
                 source: 'desktop',
             },
             {
-                label: 'Docs',
+                label: translate('Docs'),
                 Icon: <GlassIcon path={DOCS_SILHOUETTE} fillRule="evenodd" />,
                 url: '/docs',
                 source: 'desktop',
             },
             {
                 // Not a glass glyph — a baked light/dark isometric image (see DemoIcon).
-                label: 'Demo',
+                label: translate('Demo'),
                 Icon: <DemoIcon />,
                 url: '/demo',
                 source: 'desktop',
             },
             {
-                label: 'Talk to a human',
+                label: translate('Talk to a human'),
                 Icon: <GlassIcon path={TALK_TO_A_HUMAN_SILHOUETTE} />,
                 url: '/talk-to-a-human',
                 source: 'desktop',
             },
         ],
-        []
+        [translate]
     )
 }
 
@@ -142,7 +146,9 @@ const TASKBAR_HEIGHT = 42
 const DESKTOP_TOP_OFFSET = APP_CONTAINER_TOP_PADDING + TASKBAR_HEIGHT
 
 function Desktop() {
-    const productLinks = useProductLinks()
+    const location = useLocation()
+    const translate = location.pathname === '/pt-br' ? translatePtBr : identity
+    const productLinks = useProductLinks(translate)
     const { setScreensaverPreviewActive, setConfetti, updateSiteSettings } = useAppActions()
     const { siteSettings, compact } = useAppSettings()
     const { screensaverPreviewActive, confetti } = useAppUIState()
@@ -197,7 +203,7 @@ function Desktop() {
         items.map((app) => (app.url && badges[app.url] ? { ...app, badge: badges[app.url] } : app))
 
     const leftApps = applyBadges(applyGlow(productLinks))
-    const rightApps = applyBadges(applyGlow(apps))
+    const rightApps = applyBadges(applyGlow(apps.map((app) => ({ ...app, label: translate(app.label) }))))
 
     // Mobile: one continuous wrapping grid (avoids a gap when left apps don't fill a row).
     // sm+: classic left/right desktop columns that wrap into extra columns when short on height.

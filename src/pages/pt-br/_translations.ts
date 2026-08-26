@@ -1,4 +1,17 @@
 const translations: Record<string, string> = {
+    Home: 'Início',
+    'Self-driving product': 'Produto autônomo',
+    'Context warehouse': 'Armazém de contexto',
+    Pricing: 'Preços',
+    Docs: 'Documentação',
+    Demo: 'Demonstração',
+    'Talk to a human': 'Fale com uma pessoa',
+    'About us': 'Sobre nós',
+    Changelog: 'Registro de alterações',
+    'Company handbook': 'Manual da empresa',
+    Store: 'Loja',
+    Careers: 'Carreiras',
+    Trash: 'Lixeira',
     'Shift your product into': 'Coloque seu produto no',
     'self-driving mode': 'modo autônomo',
     'PostHog already knows your customers, which features they use, and the issues they have.':
