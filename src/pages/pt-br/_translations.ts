@@ -176,6 +176,17 @@ Estes são alguns exemplos de como cobramos pelos produtos mais usados:`,
     'Act now and get $0 off your first order.': 'Aja agora e ganhe US$ 0 de desconto no seu primeiro pedido.',
     'This is the': 'Este é o',
     'call to action.': 'chamado à ação.',
+    'Product analytics': 'Análise de produto',
+    'Session replay': 'Gravação de sessão',
+    'Feature flags': 'Feature flags',
+    'A/B testing': 'Testes A/B',
+    Funnels: 'Funis',
+    'User paths': 'Caminhos de usuários',
+    Retention: 'Retenção',
+    Cohorts: 'Coortes',
+    Autocapture: 'Captura automática',
+    Trends: 'Tendências',
+    Dashboards: 'Painéis',
 }
 
 export const translatePtBr = (value: string): string => translations[value] || value

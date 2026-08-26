@@ -32,7 +32,7 @@ const ROUTE_MANIFEST = Object.freeze({
     }),
     productAnalytics: Object.freeze({
         en: Object.freeze({ path: '/product-analytics', status: PUBLISHED_STATUS }),
-        'pt-BR': Object.freeze({ path: '/pt-br/product-analytics', status: PLANNED_STATUS }),
+        'pt-BR': Object.freeze({ path: '/pt-br/product-analytics', status: PUBLISHED_STATUS }),
     }),
     sessionReplay: Object.freeze({
         en: Object.freeze({ path: '/session-replay', status: PUBLISHED_STATUS }),
