@@ -24,23 +24,25 @@ test('defines the staged locale and route contract', () => {
     })
     assert.deepEqual(Object.keys(ROUTE_MANIFEST), ROUTE_IDS)
     assert.equal(validateLocaleManifest(), true)
-    assert.equal(ROUTE_MANIFEST.home['pt-BR'].status, 'published')
-    assert.equal(ROUTE_MANIFEST.productAnalytics['pt-BR'].status, 'published')
-    assert.ok(
-        Object.entries(ROUTE_MANIFEST)
-            .filter(([routeId]) => routeId !== 'home' && routeId !== 'productAnalytics')
-            .every(([, routes]) => routes['pt-BR'].status === 'planned')
-    )
+    for (const routeId of ROUTE_IDS) {
+        assert.equal(ROUTE_MANIFEST[routeId]['pt-BR'].status, 'published')
+    }
 })
 
 test('resolves locale prefixes on path segment boundaries', () => {
     const cases = [
         ['/', 'en'],
         ['/product-analytics', 'en'],
+        ['/session-replay', 'en'],
+        ['/feature-flags', 'en'],
+        ['/experiments', 'en'],
         ['/ko', 'ko'],
         ['/ko/newsletter/foo', 'ko'],
         ['/pt-br', 'pt-BR'],
         ['/pt-br/product-analytics', 'pt-BR'],
+        ['/pt-br/session-replay', 'pt-BR'],
+        ['/pt-br/feature-flags', 'pt-BR'],
+        ['/pt-br/experiments', 'pt-BR'],
         ['/koala', 'en'],
     ]
 
@@ -65,18 +67,25 @@ test('returns Brazilian Portuguese alternates only after the route is published'
         { hrefLang: 'x-default', href: '/' },
     ])
 
-    assert.deepEqual(publishedLanguageAlternates('productAnalytics'), [
-        { hrefLang: 'en', href: '/product-analytics' },
-        { hrefLang: 'pt-BR', href: '/pt-br/product-analytics' },
-        { hrefLang: 'x-default', href: '/product-analytics' },
-    ])
+    for (const [routeId, path] of [
+        ['productAnalytics', '/product-analytics'],
+        ['sessionReplay', '/session-replay'],
+        ['featureFlags', '/feature-flags'],
+        ['experiments', '/experiments'],
+    ]) {
+        assert.deepEqual(publishedLanguageAlternates(routeId), [
+            { hrefLang: 'en', href: path },
+            { hrefLang: 'pt-BR', href: `/pt-br${path}` },
+            { hrefLang: 'x-default', href: path },
+        ])
 
-    const plannedProductManifest = cloneManifest()
-    plannedProductManifest.productAnalytics['pt-BR'].status = 'planned'
-    assert.deepEqual(publishedLanguageAlternates('productAnalytics', plannedProductManifest), [
-        { hrefLang: 'en', href: '/product-analytics' },
-        { hrefLang: 'x-default', href: '/product-analytics' },
-    ])
+        const plannedManifest = cloneManifest()
+        plannedManifest[routeId]['pt-BR'].status = 'planned'
+        assert.deepEqual(publishedLanguageAlternates(routeId, plannedManifest), [
+            { hrefLang: 'en', href: path },
+            { hrefLang: 'x-default', href: path },
+        ])
+    }
 })
 
 test('provides equivalent manifest metadata for each published home route', () => {

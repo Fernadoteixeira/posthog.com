@@ -38,6 +38,15 @@ test('translates product analytics terms in pt-BR', () => {
         Autocapture: 'Captura automática',
         Trends: 'Tendências',
         Dashboards: 'Painéis',
+        'Console logs': 'Logs do console',
+        'Network latency': 'Latência de rede',
+        'DOM events': 'Eventos DOM',
+        Heatmaps: 'Mapas de calor',
+        Targeting: 'Segmentação',
+        Multivariate: 'Multivariado',
+        'Statistical significance': 'Significância estatística',
+        'Sample size': 'Tamanho da amostra',
+        'Conversion rate': 'Taxa de conversão',
     }
 
     for (const [source, translation] of Object.entries(productTerms)) {

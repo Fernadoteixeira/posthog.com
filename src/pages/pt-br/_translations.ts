@@ -187,6 +187,15 @@ Estes são alguns exemplos de como cobramos pelos produtos mais usados:`,
     Autocapture: 'Captura automática',
     Trends: 'Tendências',
     Dashboards: 'Painéis',
+    'Console logs': 'Logs do console',
+    'Network latency': 'Latência de rede',
+    'DOM events': 'Eventos DOM',
+    Heatmaps: 'Mapas de calor',
+    Targeting: 'Segmentação',
+    Multivariate: 'Multivariado',
+    'Statistical significance': 'Significância estatística',
+    'Sample size': 'Tamanho da amostra',
+    'Conversion rate': 'Taxa de conversão',
 }
 
 export const translatePtBr = (value: string): string => translations[value] || value

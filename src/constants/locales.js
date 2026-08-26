@@ -36,15 +36,15 @@ const ROUTE_MANIFEST = Object.freeze({
     }),
     sessionReplay: Object.freeze({
         en: Object.freeze({ path: '/session-replay', status: PUBLISHED_STATUS }),
-        'pt-BR': Object.freeze({ path: '/pt-br/session-replay', status: PLANNED_STATUS }),
+        'pt-BR': Object.freeze({ path: '/pt-br/session-replay', status: PUBLISHED_STATUS }),
     }),
     featureFlags: Object.freeze({
         en: Object.freeze({ path: '/feature-flags', status: PUBLISHED_STATUS }),
-        'pt-BR': Object.freeze({ path: '/pt-br/feature-flags', status: PLANNED_STATUS }),
+        'pt-BR': Object.freeze({ path: '/pt-br/feature-flags', status: PUBLISHED_STATUS }),
     }),
     experiments: Object.freeze({
         en: Object.freeze({ path: '/experiments', status: PUBLISHED_STATUS }),
-        'pt-BR': Object.freeze({ path: '/pt-br/experiments', status: PLANNED_STATUS }),
+        'pt-BR': Object.freeze({ path: '/pt-br/experiments', status: PUBLISHED_STATUS }),
     }),
 })
 
