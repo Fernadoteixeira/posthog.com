@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Dialog as RadixDialog } from 'radix-ui'
 import { navigate } from 'gatsby'
+import { useLocation } from '@reach/router'
 import { InstantSearch, useConfigure, useHits, useInstantSearch, useSearchBox } from 'react-instantsearch-hooks-web'
 import usePostHog from 'hooks/usePostHog'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
+import { searchLocalePolicy, shouldOfferEnglishSearchFallback } from 'lib/searchLocalePolicy'
 import { useApp } from '../../context/App'
 import { useSpotlightActions } from './actions'
 import type { SpotlightAction } from './actions'
@@ -43,12 +45,14 @@ function SpotlightSearchContent({
 }): JSX.Element {
     const { openNewChat } = useApp()
     const posthog = usePostHog()
+    const location = useLocation()
     const [query, setQuery] = useState('')
     const [filterQuery, setFilterQuery] = useState('')
     const [activeFilter, setActiveFilter] = useState<string | null>(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [filterMenuOpen, setFilterMenuOpen] = useState(false)
     const [filterMenuIndex, setFilterMenuIndex] = useState(0)
+    const [showingEnglishResults, setShowingEnglishResults] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
     const itemRefs = useRef<(HTMLLIElement | null)[]>([])
     const filterMenuItemRefs = useRef<(HTMLLIElement | null)[]>([])
@@ -75,7 +79,12 @@ function SpotlightSearchContent({
     const { hits } = useHits<AlgoliaRecord>()
     const { status } = useInstantSearch()
     const loading = status === 'loading' || status === 'stalled'
-    useConfigure({ facetFilters: activeFilter ? [`type:${activeFilter}`] : [] })
+    const localePolicy = searchLocalePolicy(location, showingEnglishResults)
+    // Algolia ANDs each entry. Locale values are fixed by the policy, and type
+    // values come from the curated category picker rather than the search query.
+    useConfigure({
+        facetFilters: [...localePolicy.facetFilters, ...(activeFilter ? [`type:${activeFilter}`] : [])],
+    })
     const results = useMemo(
         () =>
             hits.map((hit) => ({
@@ -127,15 +136,22 @@ function SpotlightSearchContent({
     }, [results, activeFilter])
 
     const hasResults = groups.length > 0
+    const offerEnglishFallback = shouldOfferEnglishSearchFallback({
+        query,
+        isLoading: loading,
+        hasResults,
+        policy: localePolicy,
+    })
 
     // 4+ word queries read like questions, and zero-result queries have nowhere
     // else to go — both offer Ask AI as the top result
     const suggestAskAI = queryWordCount >= 4 || (queryWordCount > 0 && !loading && !hasResults)
 
     // Flat list in rendered order (suggestion rows first), for keyboard
-    // navigation: actions → ask AI → filter → results
+    // navigation: actions → language fallback → ask AI → filter → results
     const navItems: NavItem[] = [
         ...matchedActions.map((action) => ({ kind: 'action' as const, action })),
+        ...(offerEnglishFallback ? [{ kind: 'english-fallback' as const }] : []),
         ...(suggestAskAI ? [{ kind: 'ask-ai' as const }] : []),
         ...(suggestedFilter ? [{ kind: 'filter' as const, type: suggestedFilter }] : []),
         ...(loading
@@ -221,6 +237,8 @@ function SpotlightSearchContent({
             runAction(item.action)
         } else if (item.kind === 'ask-ai') {
             askAI()
+        } else if (item.kind === 'english-fallback') {
+            setShowingEnglishResults(true)
         } else if (item.kind === 'filter') {
             applyFilter(item.type)
         } else {
@@ -232,11 +250,13 @@ function SpotlightSearchContent({
         if (open) {
             setActiveFilter(initialFilter ?? null)
             setFilterMenuOpen(false)
+            setShowingEnglishResults(false)
         }
     }, [open, initialFilter])
 
     useEffect(() => {
         setSelectedIndex(0)
+        setShowingEnglishResults(false)
     }, [query, activeFilter])
 
     useEffect(() => {
@@ -453,6 +473,9 @@ function SpotlightSearchContent({
                                                                     itemRefs={itemRefs}
                                                                     onSelectIndex={setSelectedIndex}
                                                                     onRunAction={runAction}
+                                                                    onSearchEnglish={() =>
+                                                                        setShowingEnglishResults(true)
+                                                                    }
                                                                     onAskAI={askAI}
                                                                     onApplyFilter={applyFilter}
                                                                 />

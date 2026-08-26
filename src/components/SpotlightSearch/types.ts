@@ -22,6 +22,7 @@ export type ResultGroup = {
 
 export type SuggestionItem =
     | { kind: 'action'; action: SpotlightAction }
+    | { kind: 'english-fallback' }
     | { kind: 'ask-ai' }
     | { kind: 'filter'; type: string }
 

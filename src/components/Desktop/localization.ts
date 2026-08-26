@@ -1,3 +1,5 @@
+import { isBarePtBrHomepageLocation } from '../../lib/searchLocalePolicy.js'
+
 interface LocationParts {
     pathname: string
     search: string
@@ -5,4 +7,4 @@ interface LocationParts {
 }
 
 export const shouldTranslateDesktopToPtBr = ({ pathname, search, hash }: LocationParts): boolean =>
-    pathname === '/pt-br' && search === '' && hash === ''
+    isBarePtBrHomepageLocation({ pathname, search, hash })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconFilter, IconSparkles } from '@posthog/icons'
+import { IconFilter, IconSearch, IconSparkles } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import type { SpotlightAction } from './actions'
 import { configForType } from './categories'
@@ -13,15 +13,25 @@ type SuggestionListProps = {
     itemRefs: React.MutableRefObject<(HTMLLIElement | null)[]>
     onSelectIndex: (index: number) => void
     onRunAction: (action: SpotlightAction) => void
+    onSearchEnglish: () => void
     onAskAI: () => void
     onApplyFilter: (type: string) => void
 }
 
 const hintClass = 'ml-auto hidden shrink-0 text-xs text-secondary @md:block'
+const alwaysVisibleHintClass = 'ml-auto shrink-0 text-xs text-secondary'
 
-const SuggestionHint = ({ action }: { action: string }): JSX.Element => (
-    <span className={hintClass}>
-        <KeyboardShortcut text="↵" size="xs" /> to {action}
+const SuggestionHint = ({
+    action,
+    preposition = 'to',
+    alwaysVisible = false,
+}: {
+    action: string
+    preposition?: string
+    alwaysVisible?: boolean
+}): JSX.Element => (
+    <span className={alwaysVisible ? alwaysVisibleHintClass : hintClass}>
+        <KeyboardShortcut text="↵" size="xs" /> {preposition} {action}
     </span>
 )
 
@@ -32,6 +42,7 @@ export default function SuggestionList({
     itemRefs,
     onSelectIndex,
     onRunAction,
+    onSearchEnglish,
     onAskAI,
     onApplyFilter,
 }: SuggestionListProps): JSX.Element | null {
@@ -72,6 +83,23 @@ export default function SuggestionList({
                         >
                             <p className="m-0 min-w-0 truncate text-[15px] text-primary">
                                 Ask AI: <span className="font-semibold">&ldquo;{query}&rdquo;</span>
+                            </p>
+                        </SpotlightRow>
+                    )
+                }
+
+                if (item.kind === 'english-fallback') {
+                    return (
+                        <SpotlightRow
+                            key="english-fallback"
+                            {...rowProps}
+                            icon={<IconSearch />}
+                            onSelect={onSearchEnglish}
+                            trailing={<SuggestionHint action="pesquisar" preposition="para" alwaysVisible />}
+                        >
+                            <p className="m-0 min-w-0 flex-1 text-[15px] text-primary">
+                                Nenhum resultado em português.{' '}
+                                <span className="whitespace-nowrap font-semibold">Pesquisar em inglês</span>
                             </p>
                         </SpotlightRow>
                     )
