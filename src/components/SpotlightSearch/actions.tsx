@@ -16,12 +16,10 @@ import {
     IconStar,
     IconX,
 } from '@posthog/icons'
-import { navigate } from 'gatsby'
 import { useApp, SiteSettings } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import { themeOptions } from '../../hooks/useTheme'
 import { useHedgehogMode } from 'components/HedgehogMode'
-import useEarlyAccessFeatures from 'hooks/useEarlyAccessFeatures'
 
 export type SpotlightAction = {
     id: string

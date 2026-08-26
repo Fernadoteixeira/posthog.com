@@ -5,13 +5,13 @@ import Home from 'components/Home/Test'
 import { publishedRouteMetadata } from 'constants/locales'
 import { translatePtBr } from './_translations'
 
-const PortugueseHeroCta = () => (
+const PortugueseHeroCta = (): JSX.Element => (
     <CallToAction to="https://app.posthog.com/signup" size="lg" state={{ newWindow: true, initialTab: 'signup' }}>
         Comece gratuitamente
     </CallToAction>
 )
 
-export default function BrazilianPortugueseHome() {
+export default function BrazilianPortugueseHome(): JSX.Element {
     const seo = publishedRouteMetadata('home', 'pt-BR')
 
     return (
