@@ -54,6 +54,38 @@ test('translates product analytics terms in pt-BR', () => {
     }
 })
 
+test('translates taskbar menu and system items in pt-BR', () => {
+    const menuTerms = {
+        Products: 'Produtos',
+        Company: 'Empresa',
+        Community: 'Comunidade',
+        Platform: 'Plataforma',
+        'Why PostHog': 'Por que o PostHog',
+        Customers: 'Clientes',
+        Roadmap: 'Roteiro',
+        'Executive team': 'Equipe executiva',
+        Investors: 'Investidores',
+        Newsletter: 'Newsletter',
+        Blog: 'Blog',
+        Questions: 'Perguntas',
+        Discussions: 'Discussões',
+        Guides: 'Guias',
+        Tutorials: 'Tutoriais',
+        'Sign in': 'Entrar',
+        'Sign up': 'Cadastre-se',
+        Search: 'Buscar',
+        'Sign in to the community': 'Entrar na comunidade',
+        'Community logout': 'Sair da comunidade',
+        'Display options': 'Opções de exibição',
+        'Restart PostHog': 'Reiniciar o PostHog',
+        'Shut down': 'Desligar',
+    }
+
+    for (const [source, translation] of Object.entries(menuTerms)) {
+        assert.equal(translatePtBr(source), translation)
+    }
+})
+
 test('preserves strings outside the pt-BR homepage translation catalog', () => {
     assert.equal(translatePtBr('English-only shared navigation'), 'English-only shared navigation')
 })

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
     IconSearch,
     IconChatHelp,
@@ -19,7 +19,7 @@ import {
 } from '@posthog/icons'
 import { useAppActions, useAppSettings } from '../../context/App'
 
-import MenuBar, { MenuType } from 'components/RadixUI/MenuBar'
+import MenuBar, { MenuItemType, MenuType } from 'components/RadixUI/MenuBar'
 import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -30,8 +30,30 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { MOTION_LAYER, TASKBAR_BG } from '../../constants/frostedSurfaces'
+import { useLocation } from '@reach/router'
+import { shouldTranslateDesktopToPtBr } from 'components/Desktop/localization'
+import { translatePtBr } from '../../pages/pt-br/_translations'
+
+const translateMenuItem = (item: MenuItemType): MenuItemType => {
+    if (!item || typeof item !== 'object') {
+        return item
+    }
+
+    return {
+        ...item,
+        label: typeof item.label === 'string' ? translatePtBr(item.label) : item.label,
+        items: Array.isArray(item.items) ? item.items.map(translateMenuItem) : item.items,
+    }
+}
+
+const translateMenu = (menu: MenuType): MenuType => ({
+    ...menu,
+    trigger: typeof menu.trigger === 'string' ? translatePtBr(menu.trigger) : menu.trigger,
+    items: Array.isArray(menu.items) ? menu.items.map(translateMenuItem) : menu.items,
+})
 
 function TaskBarMenu() {
+    const location = useLocation()
     const {
         openSearch,
         openSignIn,
@@ -47,6 +69,11 @@ function TaskBarMenu() {
 
     const { user, notifications, logout, isModerator } = useUser()
     const menuData = useMenuData()
+    const shouldTranslate = shouldTranslateDesktopToPtBr(location)
+    const activeMenuData = React.useMemo(
+        () => (shouldTranslate ? menuData.map(translateMenu) : menuData),
+        [shouldTranslate, menuData]
+    )
 
     const isLoggedIn = !!user
 
@@ -328,7 +355,7 @@ function TaskBarMenu() {
                     />
                     <div className="mx-auto transition-all duration-300 flex justify-between items-center w-full max-w-full">
                         <MenuBar
-                            menus={menuData}
+                            menus={activeMenuData}
                             className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
                         />
                         <aside data-scheme="secondary" className="flex items-center gap-0.5 py-1">
