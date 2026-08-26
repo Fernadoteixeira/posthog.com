@@ -1,7 +1,7 @@
 import React from 'react'
 import Editor from 'components/Editor'
 import SEO from 'components/seo'
-import { IconNotebook, IconHandMoney, IconHandwave, IconScreen } from '@posthog/icons'
+import { IconHandMoney, IconHandwave, IconScreen } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Subfeature } from 'components/Products/Subfeature'
 import CloudinaryImage from 'components/CloudinaryImage'
