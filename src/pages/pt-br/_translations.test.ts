@@ -25,6 +25,26 @@ test('translates the pt-BR homepage desktop labels', () => {
     }
 })
 
+test('translates product analytics terms in pt-BR', () => {
+    const productTerms = {
+        'Product analytics': 'Análise de produto',
+        'Session replay': 'Gravação de sessão',
+        'Feature flags': 'Feature flags',
+        'A/B testing': 'Testes A/B',
+        Funnels: 'Funis',
+        'User paths': 'Caminhos de usuários',
+        Retention: 'Retenção',
+        Cohorts: 'Coortes',
+        Autocapture: 'Captura automática',
+        Trends: 'Tendências',
+        Dashboards: 'Painéis',
+    }
+
+    for (const [source, translation] of Object.entries(productTerms)) {
+        assert.equal(translatePtBr(source), translation)
+    }
+})
+
 test('preserves strings outside the pt-BR homepage translation catalog', () => {
     assert.equal(translatePtBr('English-only shared navigation'), 'English-only shared navigation')
 })
