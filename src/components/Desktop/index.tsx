@@ -31,6 +31,7 @@ import { useToast } from '../../context/Toast'
 import { navigate } from 'gatsby'
 import useDesktopBadges from '../../hooks/useDesktopBadges'
 import { translatePtBr } from '../../pages/pt-br/_translations'
+import { shouldTranslateDesktopToPtBr } from './localization'
 
 const identity = (value: string): string => value
 
@@ -147,7 +148,7 @@ const DESKTOP_TOP_OFFSET = APP_CONTAINER_TOP_PADDING + TASKBAR_HEIGHT
 
 function Desktop() {
     const location = useLocation()
-    const translate = location.pathname === '/pt-br' ? translatePtBr : identity
+    const translate = shouldTranslateDesktopToPtBr(location) ? translatePtBr : identity
     const productLinks = useProductLinks(translate)
     const { setScreensaverPreviewActive, setConfetti, updateSiteSettings } = useAppActions()
     const { siteSettings, compact } = useAppSettings()
