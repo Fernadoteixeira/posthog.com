@@ -1,9 +1,13 @@
 import React from 'react'
 import SmallTeam from 'components/SmallTeam'
 
-export const SupportSmallTeamLink = () => (
+export const SupportSmallTeamLink = ({
+    translate = (value: string) => value,
+}: {
+    translate?: (value: string) => string
+}) => (
     <SmallTeam slug="support" noMiniCrest>
-        support folks
+        {translate('support folks')}
     </SmallTeam>
 )
 

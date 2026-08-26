@@ -1,9 +1,11 @@
 import React from 'react'
 import SEO from 'components/seo'
-import { LOCALES, publishedLanguageAlternates } from 'constants/locales'
+import { publishedRouteMetadata } from 'constants/locales'
 import Test from '../components/Home/Test'
 
 export default function Home() {
+    const seo = publishedRouteMetadata('home', 'en')
+
     return (
         <>
             <SEO
@@ -11,8 +13,7 @@ export default function Home() {
                 updateWindowTitle={false}
                 description="PostHog automatically diagnoses problems, fixes bugs, and generates pull requests – all without you having to prompt it."
                 image="/images/og/default.png"
-                lang={LOCALES.en.htmlLang}
-                languageAlternates={publishedLanguageAlternates('home')}
+                {...seo}
             />
             <Test />
         </>

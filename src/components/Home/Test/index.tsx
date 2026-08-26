@@ -29,6 +29,10 @@ import Customers from '../Customers'
 import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import { cn } from '../../../utils'
 
+export type TranslateFn = (value: string) => string
+
+const identity: TranslateFn = (value) => value
+
 /** Loads HeroCarousel + Typecaast slides only in the browser so SSR/Helmet aren't affected. */
 function LazyHeroCarousel({ className }: { className?: string }) {
     const [Content, setContent] = useState<React.ComponentType<{ className?: string }> | null>(null)
@@ -151,16 +155,24 @@ export const CTAs = () => {
     )
 }
 
-const Headline = ({ className }: { className?: string }) => (
+const Headline = ({ className, translate = identity }: { className?: string; translate?: TranslateFn }) => (
     <h1 className={cn('!text-3xl @xl:!text-4xl mt-0', className)}>
-        Shift your product into{' '}
+        {translate('Shift your product into')}{' '}
         <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 @xl:whitespace-nowrap">
-            self-driving mode
+            {translate('self-driving mode')}
         </span>
     </h1>
 )
 
-function Hero(): JSX.Element {
+function Hero({
+    translate = identity,
+    cta,
+    showCarousel = true,
+}: {
+    translate?: TranslateFn
+    cta?: React.ReactNode
+    showCarousel?: boolean
+}): JSX.Element {
     return (
         <>
             <div className="text-center @xl:text-left min-w-0">
@@ -170,14 +182,19 @@ function Hero(): JSX.Element {
                 </div>
 
                 <div className="group grid @xl:grid-cols-2 @xl:gap-x-8 min-w-0">
-                    <Headline className="@xl:row-start-1 @xl:col-start-1 @xl:col-span-2 @xl:group-has-[[data-cta-aligned]]:col-span-1" />
+                    <Headline
+                        translate={translate}
+                        className="@xl:row-start-1 @xl:col-start-1 @xl:col-span-2 @xl:group-has-[[data-cta-aligned]]:col-span-1"
+                    />
 
                     <div className="min-w-0 @xl:row-start-2 @xl:col-start-1">
                         <p className="text-balance @xl:text-wrap text-[17px]">
-                            PostHog already knows your customers, which features they use, and the issues they have.
+                            {translate(
+                                'PostHog already knows your customers, which features they use, and the issues they have.'
+                            )}
                         </p>
                         <p className="text-balance @xl:text-wrap text-[17px]">
-                            Now, PostHog automatically{' '}
+                            {translate('Now, PostHog automatically')}{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(247, 165, 1, 0.15)"
@@ -186,7 +203,7 @@ function Hero(): JSX.Element {
                                 delay={0}
                                 multiline
                             >
-                                diagnoses problems
+                                {translate('diagnoses problems')}
                             </RoughAnnotation>
                             ,{' '}
                             <RoughAnnotation
@@ -197,9 +214,9 @@ function Hero(): JSX.Element {
                                 delay={500}
                                 multiline
                             >
-                                fixes bugs
+                                {translate('fixes bugs')}
                             </RoughAnnotation>
-                            , and{' '}
+                            , {translate('and')}{' '}
                             <RoughAnnotation
                                 type="highlight"
                                 color="rgba(247, 165, 1, 0.15)"
@@ -208,9 +225,10 @@ function Hero(): JSX.Element {
                                 delay={900}
                                 multiline
                             >
-                                generates pull requests
+                                {translate('generates pull requests')}
                             </RoughAnnotation>
-                            {' – all '}
+                            {' – '}
+                            {translate('all')}{' '}
                             <RoughAnnotation
                                 type="underline"
                                 color="currentColor"
@@ -219,27 +237,39 @@ function Hero(): JSX.Element {
                                 multiline
                                 className="text-secondary"
                             >
-                                without you having to prompt it.
+                                {translate('without you having to prompt it.')}
                             </RoughAnnotation>
                         </p>
                         <p className="text-balance @xl:text-wrap text-secondary">
-                            Join 500,000+ teams already shipping with PostHog.
+                            {translate('Join 500,000+ teams already shipping with PostHog.')}
                         </p>
                     </div>
 
                     <div className="mt-6 flex flex-col items-center min-w-0 w-full @xl:row-start-2 @xl:col-start-2 @xl:mt-0 @xl:justify-center @xl:group-has-[[data-cta-aligned]]:row-start-1 @xl:group-has-[[data-cta-aligned]]:row-span-2 @xl:group-has-[[data-cta-aligned]]:justify-start">
-                        <HeroCTA />
+                        {cta || <HeroCTA />}
                     </div>
                 </div>
             </div>
 
-            <LazyHeroCarousel className="mb-4" />
-            <ToolsTicker className="mb-8" />
+            {showCarousel && <LazyHeroCarousel className="mb-4" />}
+            <ToolsTicker translate={translate} className="mb-8" />
         </>
     )
 }
 
-export default function HomeTest() {
+interface HomeTestProps {
+    translate?: TranslateFn
+    cta?: React.ReactNode
+    showCarousel?: boolean
+    locale?: string
+}
+
+export default function HomeTest({
+    translate = identity,
+    cta,
+    showCarousel = true,
+    locale = 'en',
+}: HomeTestProps = {}) {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
 
@@ -252,13 +282,13 @@ export default function HomeTest() {
     return (
         <ReaderView proseSize="lg" hideLeftSidebar showQuestions={false}>
             <div className="space-y-12">
-                <Hero />
-                <Customers />
-                <DataStackSection />
-                <PricingSection />
-                <WhyPostHogSection />
-                <BedtimeReadingSection />
-                <ShamelessCTASection />
+                <Hero translate={translate} cta={cta} showCarousel={showCarousel} />
+                <Customers translate={translate} />
+                <DataStackSection translate={translate} />
+                <PricingSection translate={translate} locale={locale} />
+                <WhyPostHogSection translate={translate} />
+                <BedtimeReadingSection translate={translate} />
+                <ShamelessCTASection translate={translate} />
                 <HitCounter />
             </div>
         </ReaderView>

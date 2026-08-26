@@ -6,6 +6,8 @@ import fs from 'fs'
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
 import { enrichVideos } from './enrichVideos'
 
+const { validateLocaleManifest } = require('../src/constants/locales')
+
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 
@@ -49,6 +51,9 @@ function invalidateGitCacheIfBranchChanged(): void {
 }
 
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) => {
+    // Fail before Gatsby sources nodes or creates pages if the localization contract is invalid.
+    validateLocaleManifest()
+
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()
     // Enrich video data with thumbnails and titles from APIs

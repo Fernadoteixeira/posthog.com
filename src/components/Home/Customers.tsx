@@ -5,6 +5,9 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { IconRefresh } from '@posthog/icons'
 import { useCustomers } from 'hooks/useCustomers'
 
+type TranslateFn = (value: string) => string
+const identity: TranslateFn = (value) => value
+
 export const COL1 = [
     'ycombinator',
     'airbus',
@@ -200,7 +203,13 @@ export const companyAttributes: Record<string, string[]> = {
     usesPostHog: ['ycombinator', 'airbus', 'trust', 'supabase', 'hasura', 'researchgate', 'heygen', 'posthog'],
 }
 
-export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) => {
+export const Customers = ({
+    tableClassName = '',
+    translate = identity,
+}: {
+    tableClassName?: string
+    translate?: TranslateFn
+}) => {
     const { getCustomers, hasCaseStudy } = useCustomers()
     const [currentBreakdown, setCurrentBreakdown] = useState('colorful')
     const [isAnimating, setIsAnimating] = useState(false)
@@ -282,8 +291,8 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
 
     const currentLabels = companyBreakdowns[currentBreakdown as keyof typeof companyBreakdowns]
     const columns = [
-        { name: currentLabels.col1, width: 'minmax(auto,1fr)', align: 'center' as const },
-        { name: currentLabels.col2, width: 'minmax(auto,1fr)', align: 'center' as const },
+        { name: translate(currentLabels.col1), width: 'minmax(auto,1fr)', align: 'center' as const },
+        { name: translate(currentLabels.col2), width: 'minmax(auto,1fr)', align: 'center' as const },
     ]
 
     const renderCustomerWithLink = (customer: any) => (
@@ -310,7 +319,9 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                         sideOffset={14}
                     >
                         <p className="text-sm mb-0">
-                            {customer.slug === 'posthog' ? 'First PostHog customer!' : 'Read customer story'}
+                            {customer.slug === 'posthog'
+                                ? translate('First PostHog customer!')
+                                : translate('Read customer story')}
                         </p>
                     </Tooltip>
                 </OSButton>
@@ -345,8 +356,12 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
 
     return (
         <div id="customers">
-            <h2>Social proof</h2>
-            <p>Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.</p>
+            <h2>{translate('Social proof')}</h2>
+            <p>
+                {translate(
+                    "Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago."
+                )}
+            </p>
             <OSTable
                 columns={columns}
                 rows={rows}
@@ -363,7 +378,7 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                         size="sm"
                         className="font-semibold rounded-full [&_span]:rounded-full aspect-square [&_span]:aspect-square disabled:opacity-100"
                         disabled={isAnimating}
-                        tooltip="Shuffle companies"
+                        tooltip={translate('Shuffle companies')}
                         icon={
                             <IconRefresh
                                 className={`size-4 inline-block relative -top-px ${
@@ -375,7 +390,7 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                 </div>
             </OSTable>
             <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open Customers
+                {translate('Open Customers')}
             </OSButton>
         </div>
     )

@@ -4,13 +4,16 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
-export const ShamelessCTA = () => {
+type TranslateFn = (value: string) => string
+const identity: TranslateFn = (value) => value
+
+export const ShamelessCTA = ({ translate = identity }: { translate?: TranslateFn }) => {
     const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true })
 
     return (
         <>
             <p className="-mt-2 mb-12 @md:mb-12 @md:mr-[245px]">
-                If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+                {translate('If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.')}
             </p>
             <div className="relative" ref={ref}>
                 <div className="absolute top-0 -translate-y-[40%] @md:-translate-y-[60%] right-4 @md:right-12 max-w-[120px] @md:max-w-[185px] -z-10">
@@ -25,7 +28,7 @@ export const ShamelessCTA = () => {
                         />
                     </motion.div>
                 </div>
-                <CTA headline={false} card />
+                <CTA headline={false} card translate={translate} />
             </div>
         </>
     )

@@ -11,16 +11,18 @@ import { motion } from 'framer-motion'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
 
-const ProductDetails = () => (
+const identity = (value) => value
+
+const ProductDetails = ({ translate = identity }) => (
     <>
         <span className="bg-green inline-flex items-center gap-1 px-2 py-1 rounded-sm">
             <span className="w-3 h-3">
                 <Eco />
             </span>
-            <span className="uppercase font-semibold text-xs text-white">Eco-friendly</span>
+            <span className="uppercase font-semibold text-xs text-white">{translate('Eco-friendly')}</span>
         </span>
         <p className="text-4xl font-bold m-0 @xl:mt-2">PostHog Web</p>
-        <p className="opacity-50 m-0 mb-4 text-sm">Digital download*</p>
+        <p className="opacity-50 m-0 mb-4 text-sm">{translate('Digital download*')}</p>
     </>
 )
 
@@ -44,7 +46,7 @@ const SignupEmbed = () => {
     )
 }
 
-export default function CTA({ headline = true, card = false }) {
+export default function CTA({ headline = true, card = false, translate = identity }) {
     const { addWindow } = useApp()
     const posthog = usePostHog()
     const [version, setVersion] = useState('us')
@@ -64,7 +66,7 @@ export default function CTA({ headline = true, card = false }) {
     const content = (
         <>
             <div className={card ? '@xl:hidden pb-12 @xl:pb-0' : '@xl:hidden py-12'}>
-                <ProductDetails />
+                <ProductDetails translate={translate} />
             </div>
 
             <div className={`@xl:grid grid-cols-2 gap-16 @xl:pt-16 max-w-5xl mx-auto ${card ? '@xl:-mt-14' : ''}`}>
@@ -78,7 +80,7 @@ export default function CTA({ headline = true, card = false }) {
                         <div className="absolute -left-2 bottom-0 translate-y-1/2">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/g2-badge.png"
-                                alt="People on G2 think we're great"
+                                alt={translate("People on G2 think we're great")}
                                 className="w-[90px]"
                             />
                         </div>
@@ -92,37 +94,39 @@ export default function CTA({ headline = true, card = false }) {
                             className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 @xl:right-auto rounded @xl:rounded-none"
                         >
                             <span className="text-sm font-bold text-white">
-                                3 people <span className="text-xs text-normal">(would have)</span> added PostHog to
-                                their cart*
+                                {translate('3 people')}{' '}
+                                <span className="text-xs text-normal">{translate('(would have)')}</span>{' '}
+                                {translate('added PostHog to their cart*')}
                             </span>
                             <br />
-                            <span className="text-xs text-white">*if this were a real cart</span>
+                            <span className="text-xs text-white">{translate('*if this were a real cart')}</span>
                         </motion.div>
                     )}
                     <div className="absolute top-4 -right-12">
                         <div className="relative">
                             <Bang className="w-[189px] animate-grow" />
                             <p className="px-8 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-lg rotate-6">
-                                <span className="text-xs">Not</span>
-                                endorsed <br />
-                                by Kim K
+                                <span className="text-xs">{translate('Not')}</span>
+                                {translate('endorsed')} <br />
+                                {translate('by Kim K')}
                             </p>
                         </div>
                     </div>
                     <p className="pl-24 text-xs opacity-60 text-right">
-                        *PostHog is a web product and cannot be installed by CD.
+                        {translate('*PostHog is a web product and cannot be installed by CD.')}
                         <br />
-                        We <em>did</em> once send some customers a floppy disk but it was a Rickroll.
+                        {translate('We')} <em>{translate('did')}</em>{' '}
+                        {translate('once send some customers a floppy disk but it was a Rickroll.')}
                     </p>
                 </div>
                 <div>
                     <div className="hidden @xl:block">
-                        <ProductDetails />
+                        <ProductDetails translate={translate} />
                     </div>
 
                     <ul className="p-0 m-0 space-y-5">
                         <li className="list-none">
-                            <strong className="text-lg block pb-1">Select your cloud</strong>
+                            <strong className="text-lg block pb-1">{translate('Select your cloud')}</strong>
                             <ul className="flex gap-2 p-0 list-none">
                                 <li>
                                     <button
@@ -133,7 +137,7 @@ export default function CTA({ headline = true, card = false }) {
                                                 : 'border-transparent dark:border-transparent'
                                         }  hover:border-black dark:hover:border-white`}
                                     >
-                                        US (Virginia)
+                                        {translate('US (Virginia)')}
                                     </button>
                                 </li>
                                 <li>
@@ -145,18 +149,18 @@ export default function CTA({ headline = true, card = false }) {
                                                 : 'border-transparent dark:border-transparent'
                                         }  hover:border-black dark:hover:border-white`}
                                     >
-                                        EU (Frankfurt)
+                                        {translate('EU (Frankfurt)')}
                                     </button>
                                 </li>
                             </ul>
                         </li>
                         <li className="list-none">
-                            <strong className="text-lg block">Starts at:</strong>
+                            <strong className="text-lg block">{translate('Starts at:')}</strong>
                             <div className="flex items-baseline gap-1">
                                 <s className="font-bold text-xl">$0</s>
-                                <span className="font-bold text-red text-xl uppercase">Free</span>
+                                <span className="font-bold text-red text-xl uppercase">{translate('Free')}</span>
                                 <span className="text-xs opacity-50">
-                                    &gt;<span className="text-sm">1 left at this price!!</span>
+                                    &gt;<span className="text-sm">{translate('1 left at this price!!')}</span>
                                 </span>
                             </div>
                         </li>
@@ -171,7 +175,7 @@ export default function CTA({ headline = true, card = false }) {
                             className="animate-grow-sm"
                             state={{ initialTab: 'signup' }}
                         >
-                            Get started
+                            {translate('Get started')}
                         </CallToAction>
                     </div>
 
@@ -180,7 +184,8 @@ export default function CTA({ headline = true, card = false }) {
                             <TrendUp className="opacity-75" />
                         </span>
                         <p className="text-sm text-secondary leading-tight mb-0">
-                            <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
+                            <strong>{translate('Hurry:')}</strong> {signupCountToday || translate('Tons of')}{' '}
+                            {translate('companies signed up')}{' '}
                             <button
                                 onClick={() =>
                                     addWindow(
@@ -193,10 +198,10 @@ export default function CTA({ headline = true, card = false }) {
                                 }
                                 className="font-bold dark:text-yellow text-red"
                             >
-                                today
+                                {translate('today')}
                             </button>
                             . <br className="hidden sm:block" />
-                            Act now and get $0 off your first order.
+                            {translate('Act now and get $0 off your first order.')}
                         </p>
                     </div>
                 </div>
@@ -210,13 +215,15 @@ export default function CTA({ headline = true, card = false }) {
                 {headline && (
                     <>
                         <h2 className={heading('lg')}>
-                            This is the{' '}
+                            {translate('This is the')}{' '}
                             <span className="bg-highlight p-0.5 font-bold text-red dark:text-yellow inline-block">
-                                call to action.
+                                {translate('call to action.')}
                             </span>
                         </h2>
                         <h3 className={heading('sm')}>
-                            If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+                            {translate(
+                                'If nothing else has sold you on PostHog, hopefully these classic marketing tactics will.'
+                            )}
                         </h3>
                     </>
                 )}

@@ -28,7 +28,7 @@ const ROUTE_MANIFEST = Object.freeze({
     home: Object.freeze({
         en: Object.freeze({ path: '/', status: PUBLISHED_STATUS }),
         ko: Object.freeze({ path: '/ko', status: PUBLISHED_STATUS }),
-        'pt-BR': Object.freeze({ path: '/pt-br', status: PLANNED_STATUS }),
+        'pt-BR': Object.freeze({ path: '/pt-br', status: PUBLISHED_STATUS }),
     }),
     productAnalytics: Object.freeze({
         en: Object.freeze({ path: '/product-analytics', status: PUBLISHED_STATUS }),
@@ -104,6 +104,27 @@ const publishedLanguageAlternates = (routeId, routeManifest = ROUTE_MANIFEST, lo
     }
 
     return alternates
+}
+
+/**
+ * Returns manifest-derived SEO data for a published localized route.
+ */
+const publishedRouteMetadata = (routeId, localeCode, routeManifest = ROUTE_MANIFEST, locales = LOCALES) => {
+    const locale = locales[localeCode]
+    const route = routeManifest[routeId]?.[localeCode]
+
+    if (!locale) {
+        throw new Error(`Unknown locale: ${localeCode}`)
+    }
+    if (!route || route.status !== PUBLISHED_STATUS) {
+        throw new Error(`Route ${routeId} is not published for locale ${localeCode}`)
+    }
+
+    return {
+        lang: locale.htmlLang,
+        canonicalUrl: route.path,
+        languageAlternates: publishedLanguageAlternates(routeId, routeManifest, locales),
+    }
 }
 
 /**
@@ -198,7 +219,7 @@ const validateLocaleManifest = (locales = LOCALES, routeManifest = ROUTE_MANIFES
                 throw new Error(`Route ${routeId} has an invalid path for locale ${localeCode}`)
             }
             if (!ROUTE_STATUSES.has(route.status)) {
-                throw new Error(`Route ${routeId} has unsupported status: ${route.status}`)
+                throw new Error(`Route ${routeId} has unsupported status for locale ${localeCode}: ${route.status}`)
             }
 
             if (locale.isDefault) {
@@ -232,8 +253,6 @@ const validateLocaleManifest = (locales = LOCALES, routeManifest = ROUTE_MANIFES
     return true
 }
 
-validateLocaleManifest()
-
 module.exports = {
     LOCALES,
     ROUTE_IDS,
@@ -242,5 +261,6 @@ module.exports = {
     PLANNED_STATUS,
     localeForPath,
     publishedLanguageAlternates,
+    publishedRouteMetadata,
     validateLocaleManifest,
 }

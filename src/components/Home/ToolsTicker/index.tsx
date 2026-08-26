@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import useProduct from 'hooks/useProduct'
 import ToolsTickerStrip from './ToolsTickerStrip'
 
+type TranslateFn = (value: string) => string
+
 // Seconds each item takes to cross one loop; total duration scales with item count
 // so the apparent speed stays constant when handles are added or removed.
 const SECONDS_PER_ITEM = 2.5
@@ -38,6 +40,7 @@ interface ToolsTickerProps {
     handles?: string[]
     label?: string
     className?: string
+    translate?: TranslateFn
     /** Which way the names travel. `'left'` (default) is the homepage direction. */
     direction?: 'left' | 'right'
 }
@@ -47,6 +50,7 @@ export default function ToolsTicker({
     label = 'Built-in tools for your agents:',
     className = '',
     direction = 'left',
+    translate = (value) => value,
 }: ToolsTickerProps): JSX.Element | null {
     const allProducts = useProduct()
     const [isPaused, setIsPaused] = useState(false)
@@ -65,7 +69,7 @@ export default function ToolsTicker({
     return (
         <div className={`@container not-prose ${className}`}>
             <div className="flex flex-col @sm:flex-row @sm:items-center gap-1 @sm:gap-3">
-                <span className="shrink-0 text-sm text-secondary">{label}</span>
+                <span className="shrink-0 text-sm text-secondary">{translate(label)}</span>
                 <div
                     className="relative flex-1 min-w-0 overflow-hidden motion-reduce:overflow-x-auto [mask-image:linear-gradient(to_right,transparent,#000_1.5rem,#000_calc(100%-1.5rem),transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,#000_1.5rem,#000_calc(100%-1.5rem),transparent)]"
                     onMouseEnter={() => setIsPaused(true)}

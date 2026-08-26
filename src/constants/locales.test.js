@@ -9,6 +9,7 @@ const {
     ROUTE_MANIFEST,
     localeForPath,
     publishedLanguageAlternates,
+    publishedRouteMetadata,
     validateLocaleManifest,
 } = require('./locales')
 
@@ -23,7 +24,12 @@ test('defines the staged locale and route contract', () => {
     })
     assert.deepEqual(Object.keys(ROUTE_MANIFEST), ROUTE_IDS)
     assert.equal(validateLocaleManifest(), true)
-    assert.ok(Object.values(ROUTE_MANIFEST).every((routes) => routes['pt-BR'].status === 'planned'))
+    assert.equal(ROUTE_MANIFEST.home['pt-BR'].status, 'published')
+    assert.ok(
+        Object.entries(ROUTE_MANIFEST)
+            .filter(([routeId]) => routeId !== 'home')
+            .every(([, routes]) => routes['pt-BR'].status === 'planned')
+    )
 })
 
 test('resolves locale prefixes on path segment boundaries', () => {
@@ -42,16 +48,49 @@ test('resolves locale prefixes on path segment boundaries', () => {
     }
 })
 
-test('returns published alternates and keeps planned Brazilian Portuguese routes private', () => {
+test('returns Brazilian Portuguese alternates only after the home route is published', () => {
     assert.deepEqual(publishedLanguageAlternates('home'), [
+        { hrefLang: 'en', href: '/' },
+        { hrefLang: 'ko', href: '/ko' },
+        { hrefLang: 'pt-BR', href: '/pt-br' },
+        { hrefLang: 'x-default', href: '/' },
+    ])
+
+    const plannedHomeManifest = cloneManifest()
+    plannedHomeManifest.home['pt-BR'].status = 'planned'
+    assert.deepEqual(publishedLanguageAlternates('home', plannedHomeManifest), [
         { hrefLang: 'en', href: '/' },
         { hrefLang: 'ko', href: '/ko' },
         { hrefLang: 'x-default', href: '/' },
     ])
+
     assert.deepEqual(publishedLanguageAlternates('productAnalytics'), [
         { hrefLang: 'en', href: '/product-analytics' },
         { hrefLang: 'x-default', href: '/product-analytics' },
     ])
+})
+
+test('provides equivalent manifest metadata for each published home route', () => {
+    const expectedAlternates = [
+        { hrefLang: 'en', href: '/' },
+        { hrefLang: 'ko', href: '/ko' },
+        { hrefLang: 'pt-BR', href: '/pt-br' },
+        { hrefLang: 'x-default', href: '/' },
+    ]
+
+    const rootLocales = [
+        ['en', '/', 'en'],
+        ['ko', '/ko', 'ko'],
+        ['pt-BR', '/pt-br', 'pt-BR'],
+    ]
+
+    for (const [localeCode, canonicalUrl, lang] of rootLocales) {
+        const metadata = publishedRouteMetadata('home', localeCode)
+        assert.equal(metadata.lang, lang)
+        assert.equal(metadata.canonicalUrl, canonicalUrl)
+        assert.equal(localeForPath(metadata.canonicalUrl).code, localeCode)
+        assert.deepEqual(metadata.languageAlternates, expectedAlternates)
+    }
 })
 
 test('rejects malformed locale prefixes', () => {
@@ -65,19 +104,25 @@ test('rejects missing English routes', () => {
     const routeManifest = cloneManifest()
     delete routeManifest.home.en
 
-    assert.throws(() => validateLocaleManifest(cloneLocales(), routeManifest), /missing an English route/)
+    assert.throws(() => validateLocaleManifest(cloneLocales(), routeManifest), /Route home is missing an English route/)
 })
 
 test('rejects unsupported route locales and statuses', () => {
     const unsupportedLocaleManifest = cloneManifest()
     unsupportedLocaleManifest.home.fr = { path: '/fr', status: 'planned' }
 
-    assert.throws(() => validateLocaleManifest(cloneLocales(), unsupportedLocaleManifest), /unsupported locale/)
+    assert.throws(
+        () => validateLocaleManifest(cloneLocales(), unsupportedLocaleManifest),
+        /Route home uses unsupported locale: fr/
+    )
 
     const unsupportedStatusManifest = cloneManifest()
     unsupportedStatusManifest.home.ko.status = 'draft'
 
-    assert.throws(() => validateLocaleManifest(cloneLocales(), unsupportedStatusManifest), /unsupported status/)
+    assert.throws(
+        () => validateLocaleManifest(cloneLocales(), unsupportedStatusManifest),
+        /Route home has unsupported status for locale ko: draft/
+    )
 })
 
 test('rejects duplicate published paths and prefixed default routes', () => {

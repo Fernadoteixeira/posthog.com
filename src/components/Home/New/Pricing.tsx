@@ -6,26 +6,35 @@ import { IconArrowUpRight } from '@posthog/icons'
 import { Link } from 'gatsby'
 import OSButton from 'components/OSButton'
 
+type TranslateFn = (value: string) => string
+const identity: TranslateFn = (value) => value
+
 const productsToShow = ['product_analytics', 'feature_flags', 'session_replay', 'data_warehouse']
 
-function numberToWords(num: number): string {
+function numberToWords(num: number, locale: string, translate: TranslateFn): string {
     if (num >= 1_000_000) {
-        return `${num / 1_000_000} million`
+        return `${num / 1_000_000} ${translate('million')}`
     } else if (num >= 1_000) {
-        return num.toLocaleString()
+        return num.toLocaleString(locale)
     }
     return num.toString()
 }
 
-export default function Pricing() {
+export default function Pricing({ translate = identity, locale = 'en' }: { translate?: TranslateFn; locale?: string }) {
     const { products: initialProducts } = useProducts()
     const products = initialProducts.filter((product) => productsToShow.includes(product.handle))
+    const formatUsage = (product: (typeof products)[number]) =>
+        `${numberToWords(product.freeLimit, locale, translate)} ${translate(`${product.unit}s/mo`)}`
 
     const columns = [
         { name: '', width: '50px', align: 'center' as const },
-        { name: 'Product', width: 'minmax(200px,1fr)', align: 'left' as const },
-        { name: 'Free tier', width: 'minmax(200px,1fr)', align: 'left' as const },
-        { name: 'Pricing (decreases with volume)', width: 'minmax(200px,2fr)', align: 'left' as const },
+        { name: translate('Product'), width: 'minmax(200px,1fr)', align: 'left' as const },
+        { name: translate('Free tier'), width: 'minmax(200px,1fr)', align: 'left' as const },
+        {
+            name: translate('Pricing (decreases with volume)'),
+            width: 'minmax(200px,2fr)',
+            align: 'left' as const,
+        },
     ]
 
     const rows = products.map((product, index) => ({
@@ -39,7 +48,7 @@ export default function Pricing() {
                     </Link>
                 ),
             },
-            { content: `${numberToWords(product.freeLimit)} ${product.unit}s/mo` },
+            { content: formatUsage(product) },
             {
                 content: (
                     <span>
@@ -70,13 +79,12 @@ export default function Pricing() {
                         </div>
                         <div className="px-3 py-2 text-sm space-y-1">
                             <div>
-                                <span className="text-muted">Free tier:</span> {numberToWords(product.freeLimit)}{' '}
-                                {product.unit}s/mo
+                                <span className="text-muted">{translate('Free tier:')}</span> {formatUsage(product)}
                             </div>
                             <div>
-                                <span className="text-muted">Pricing:</span> $
+                                <span className="text-muted">{translate('Pricing:')}</span> $
                                 {product.startsAt.length <= 3 ? Number(product.startsAt).toFixed(2) : product.startsAt}/
-                                {product.unit}
+                                {translate(product.unit)}
                             </div>
                         </div>
                     </div>
