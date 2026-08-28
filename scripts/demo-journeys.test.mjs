@@ -113,3 +113,19 @@ test('reports/evidence/evidence-ledger.json maintains append-only audit trail', 
     assert.ok(ledger.claims.length >= 1, 'Ledger must contain at least baseline initialization claim')
     assert.equal(ledger.claims[0].status, 'PASS')
 })
+
+test('src/pages/demo-journeys/index.tsx provides the interactive 360 desktop app hub', () => {
+    const hubPagePath = path.join(rootDir, 'src', 'pages', 'demo-journeys', 'index.tsx')
+    assert.ok(fs.existsSync(hubPagePath), 'Demo journeys hub page must exist')
+    const content = fs.readFileSync(hubPagePath, 'utf-8')
+    assert.ok(content.includes('DemoJourneysPage'), 'Hub page must export DemoJourneysPage component')
+    assert.ok(content.includes('HeaderBar'), 'Hub page must use HeaderBar component')
+})
+
+test('templates/demo-journeys-negative-paths-v1.json defines 8 adversarial quality scenarios', () => {
+    const negPathsFile = path.join(rootDir, 'templates', 'demo-journeys-negative-paths-v1.json')
+    assert.ok(fs.existsSync(negPathsFile), 'Negative paths JSON must exist')
+    const negData = JSON.parse(fs.readFileSync(negPathsFile, 'utf-8'))
+    assert.equal(negData.total_negative_paths, 8)
+    assert.equal(negData.negative_paths.length, 8)
+})
