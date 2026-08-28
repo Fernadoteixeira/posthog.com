@@ -42,6 +42,9 @@
         "postinstall": "patch-package",
         "prepare": "husky",
         "format:docs": "git diff --name-only --diff-filter=AM \"*.mdx\" \"*.md\" | xargs node scripts/fix-mdx.js",
+        "validate:journeys": "node scripts/validate-demo-journeys.js",
+        "test:journeys": "node --test scripts/demo-journeys.test.mjs",
+        "capture:journeys": "node scripts/capture-demo-journeys.js",
         "vale": "vale",
         "vale:staged": "git diff --cached --name-only --diff-filter=AM -- '*.md' '*.mdx' | xargs vale",
         "vale:test": "vale .vale/test"

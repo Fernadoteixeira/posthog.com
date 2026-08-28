@@ -1,0 +1,17 @@
+flowchart TD
+  W0["Onda 0: Desktop OS & Shell<br/>PV-001..PV-007<br/>Homepage, Janelas, Menus, Atalhos, Display"] --> W1["Onda 1: Product Analytics<br/>PV-008..PV-016<br/>Insights, Funis, Retenção, Trends, SQL HogQL, Dashboards"]
+  W1 --> W2["Onda 2: Session Replay & Vision<br/>PV-017..PV-023<br/>Player de Gravação, Heatmaps, Console, Replay Vision"]
+  W2 --> W3["Onda 3: Feature Flags & Experiments<br/>PV-024..PV-030<br/>Flags, Variantes, Rollouts, Testes A/B, Early Access"]
+  W3 --> W4["Onda 4: CDP & Pipelines<br/>PV-031..PV-038<br/>Fontes, Destinos em Tempo Real, Hog Functions, Webhooks"]
+  W4 --> W5["Onda 5: Data Warehouse<br/>PV-039..PV-044<br/>Conectores S3/BigQuery, Modelagem, Queries Unificadas, Sync"]
+  W5 --> W6["Onda 6: AI Observability & Errors<br/>PV-045..PV-051<br/>Traces LLM, Prompts, Tokens, Error Tracking, Logs"]
+  W6 --> W7["Onda 7: Surveys & Growth<br/>PV-052..PV-057<br/>Pesquisas NPS/CSAT, Web Analytics, Workflows"]
+  W7 --> W8["Onda 8: Governança, Billing & Docs<br/>PV-058..PV-065<br/>Pricing, Docs, Handbook, Comunidade, DPA & Segurança"]
+
+  W8 -.-> CAPTURE["Captura Visual 360°<br/>Grid 4-State (Light/Dark x Narrow/Wide) + GIFs<br/>Estado: NOT_EXECUTED"]
+  CAPTURE -.-> LEDGER["Evidence Ledger<br/>Hashes SHA-256 + Timestamps UTC"]
+
+  classDef wave fill:#e7f5ff,stroke:#0b6e99,color:#073b4c,stroke-width:2px;
+  classDef ledger fill:#fff3cd,stroke:#9a6700,color:#5c4300,stroke-width:2px;
+  class W0,W1,W2,W3,W4,W5,W6,W7,W8 wave;
+  class CAPTURE,LEDGER ledger;

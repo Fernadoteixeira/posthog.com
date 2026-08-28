@@ -1,0 +1,142 @@
+{
+    "generated_at_utc": "2026-08-28T00:42:21.956Z",
+    "namespace": "demo-ph-",
+    "organization": {
+        "id": "demo-ph-org-001",
+        "name": "Hedgehog Corp (Demo)",
+        "plan": "enterprise",
+        "enforce_2fa": true
+    },
+    "projects": [
+        {
+            "id": "demo-ph-proj-001",
+            "name": "E-commerce Web App",
+            "api_key": "[REDACTED_PROJECT_API_KEY_SYNTHETIC]",
+            "timezone": "UTC"
+        },
+        {
+            "id": "demo-ph-proj-002",
+            "name": "Mobile App (iOS/Android)",
+            "api_key": "[REDACTED_PROJECT_API_KEY_SYNTHETIC]",
+            "timezone": "UTC"
+        }
+    ],
+    "users": [
+        {
+            "actor_id": "anonymous-visitor",
+            "email": "anonymous-visitor@demo.posthog.internal",
+            "name": "Visitante Anônimo / Explorador",
+            "role": "Não Autenticado",
+            "distinct_id": "demo-ph-user-001"
+        },
+        {
+            "actor_id": "demo-product-engineer",
+            "email": "demo-product-engineer@demo.posthog.internal",
+            "name": "Engenheiro de Produto / Full-stack",
+            "role": "Desenvolvedor de Aplicação",
+            "distinct_id": "demo-ph-user-002"
+        },
+        {
+            "actor_id": "demo-growth-lead",
+            "email": "demo-growth-lead@demo.posthog.internal",
+            "name": "Líder de Growth / Product Manager",
+            "role": "Analista de Produto & Negócios",
+            "distinct_id": "demo-ph-user-003"
+        },
+        {
+            "actor_id": "demo-data-engineer",
+            "email": "demo-data-engineer@demo.posthog.internal",
+            "name": "Engenheiro de Dados / Analytics Engineer",
+            "role": "Arquiteto de Dados",
+            "distinct_id": "demo-ph-user-004"
+        },
+        {
+            "actor_id": "demo-platform-admin",
+            "email": "demo-platform-admin@demo.posthog.internal",
+            "name": "Administrador de Organização / SRE",
+            "role": "Administrador de Plataforma",
+            "distinct_id": "demo-ph-user-005"
+        },
+        {
+            "actor_id": "demo-security-reviewer",
+            "email": "demo-security-reviewer@demo.posthog.internal",
+            "name": "Auditor de Segurança / Compliance Officer",
+            "role": "Auditor de Conformidade & Privacidade",
+            "distinct_id": "demo-ph-user-006"
+        },
+        {
+            "actor_id": "demo-ai-engineer",
+            "email": "demo-ai-engineer@demo.posthog.internal",
+            "name": "Engenheiro de IA / LLM Developer",
+            "role": "Desenvolvedor de Sistemas de IA",
+            "distinct_id": "demo-ph-user-007"
+        },
+        {
+            "actor_id": "demo-support-specialist",
+            "email": "demo-support-specialist@demo.posthog.internal",
+            "name": "Especialista de Suporte / Customer Success",
+            "role": "Operador de Atendimento",
+            "distinct_id": "demo-ph-user-008"
+        },
+        {
+            "actor_id": "demo-executive-sponsor",
+            "email": "demo-executive-sponsor@demo.posthog.internal",
+            "name": "Executivo / Founder / VP de Engenharia",
+            "role": "Tomador de Decisão Executiva",
+            "distinct_id": "demo-ph-user-009"
+        },
+        {
+            "actor_id": "demo-community-contributor",
+            "email": "demo-community-contributor@demo.posthog.internal",
+            "name": "Colaborador da Comunidade / Open Source",
+            "role": "Desenvolvedor Externo & Comunidade",
+            "distinct_id": "demo-ph-user-010"
+        }
+    ],
+    "feature_flags": [
+        {
+            "key": "demo-ph-flag-instant-checkout",
+            "name": "Instant Checkout Flow",
+            "rollout_percentage": 50,
+            "active": true,
+            "variants": [
+                {
+                    "key": "control",
+                    "rollout_percentage": 50
+                },
+                {
+                    "key": "one-click",
+                    "rollout_percentage": 50
+                }
+            ]
+        },
+        {
+            "key": "demo-ph-flag-ai-assistant",
+            "name": "In-app AI Assistant",
+            "rollout_percentage": 100,
+            "active": true
+        }
+    ],
+    "sample_events": [
+        {
+            "event": "$pageview",
+            "distinct_id": "demo-ph-user-001",
+            "properties": {
+                "$current_url": "http://localhost:8001/",
+                "$browser": "Chrome",
+                "$os": "Windows"
+            },
+            "timestamp": "2026-08-27T23:42:21.956Z"
+        },
+        {
+            "event": "checkout_completed",
+            "distinct_id": "demo-ph-user-002",
+            "properties": {
+                "order_total_usd": 129.99,
+                "items_count": 3,
+                "payment_method": "credit_card_masked"
+            },
+            "timestamp": "2026-08-28T00:12:21.956Z"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+name: Demo Journeys Canonical 360 Verification
+
+on:
+    pull_request:
+    push:
+        branches:
+            - master
+            - main
+
+jobs:
+    verify_demo_journeys:
+        name: Validate Journeys & Contracts
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Validate Demo Journeys Schemas & Catalogs
+              run: node scripts/validate-demo-journeys.js
+
+            - name: Run Demo Journeys Automated Test Suite
+              run: node --test scripts/demo-journeys.test.mjs
+
+            - name: Execute Capture Runner Dry-Run Simulation
+              run: node scripts/capture-demo-journeys.js --dry-run

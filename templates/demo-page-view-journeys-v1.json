@@ -1,0 +1,1696 @@
+{
+    "schema_version": "demo-page-view-journeys-v1",
+    "project": "posthog.com",
+    "authoritative": false,
+    "purpose": "Catálogo estático e exaustivo de 65 Page Views cobrindo 100% das superfícies do PostHog com JTBDs, inputs/outputs, outcomes, gaps e contratos de evidência visual 360°.",
+    "total_page_views": 65,
+    "waves": [
+        "W0-DESKTOP-SHELL",
+        "W1-PRODUCT-ANALYTICS",
+        "W2-SESSION-REPLAY",
+        "W3-FLAGS-EXPERIMENTS",
+        "W4-CDP-PIPELINES",
+        "W5-DATA-WAREHOUSE",
+        "W6-AI-ERROR-TRACKING",
+        "W7-SURVEYS-GROWTH",
+        "W8-GOVERNANCE-COMMUNITY"
+    ],
+    "page_views": [
+        {
+            "id": "PV-001",
+            "route": "/",
+            "title": "Desktop OS Homepage",
+            "wave": "W0-DESKTOP-SHELL",
+            "surface": "Desktop OS Core",
+            "app_template": "Desktop",
+            "primary_actor": "anonymous-visitor",
+            "supporting_actors": ["demo-product-engineer", "demo-executive-sponsor"],
+            "jtbd": "WHEN visito a página inicial do PostHog I WANT TO interagir com o ambiente de desktop OS e explorar os produtos disponíveis SO I CAN compreender o valor da plataforma integrada de produto WITHOUT ser bombardeado por páginas de marketing genéricas e prolixas.",
+            "inputs": [
+                "Navegador desktop ou mobile",
+                "Preferência de tema",
+                "Interação com ícones da área de trabalho"
+            ],
+            "outputs": [
+                "Desktop OS renderizado",
+                "Janelas empilháveis",
+                "Barra de tarefas inferior com TaskBarMenu",
+                "Ícones de aplicativos"
+            ],
+            "expected_outcome": "O usuário visualiza uma interface limpa, rápida e responsiva que transmite densidade de informação e poder computacional.",
+            "gaps": [
+                "Hidratação inicial requer ~9s para montagem completa de componentes no Puppeteer.",
+                "Detecção de layout mobile requer ajuste de zoom."
+            ],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-001-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-001-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-001-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-001-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-001-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-002",
+            "route": "/display-options",
+            "title": "Painel de Opções de Exibição",
+            "wave": "W0-DESKTOP-SHELL",
+            "surface": "Preferências do Sistema",
+            "app_template": "<Editor />",
+            "primary_actor": "anonymous-visitor",
+            "supporting_actors": ["demo-platform-admin"],
+            "jtbd": "WHEN quero personalizar a aparência do desktop I WANT TO alternar entre temas claro/escuro, escala e preferências visuais SO I CAN ter uma experiência ergonômica de trabalho WITHOUT perder o estado das janelas abertas.",
+            "inputs": ["Atalho de teclado ',' ou clique no menu", "Seleção de modo de cor"],
+            "outputs": ["Janela de opções de exibição aberta", "Controles de rádio de tema", "Preview de cores"],
+            "expected_outcome": "As alterações de tema são aplicadas instantaneamente em todas as janelas ativas e salvas no localStorage.",
+            "gaps": ["Sincronização entre theme e siteSettings no localStorage exige set duplo."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-002-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-002-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-002-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-002-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-002-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-003",
+            "route": "/kbd",
+            "title": "Painel de Atalhos de Teclado",
+            "wave": "W0-DESKTOP-SHELL",
+            "surface": "Produtividade do Sistema",
+            "app_template": "Custom Modal",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["anonymous-visitor"],
+            "jtbd": "WHEN navego pelo PostHog I WANT TO consultar todos os atalhos de teclado disponíveis SO I CAN operar o sistema na velocidade do pensamento WITHOUT precisar do mouse.",
+            "inputs": ["Atalho de teclado '.'", "Filtro de busca de atalhos"],
+            "outputs": ["Tabela visual de combinações de teclas", "Ações mapeadas", "Atalhos globais e de janela"],
+            "expected_outcome": "O usuário encontra o atalho desejado e pode fechar o modal com a tecla Escape.",
+            "gaps": ["Modal customizado não segue o template padrão <Editor /> por design de UX."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-003-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-003-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-003-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-003-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-003-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-004",
+            "route": "/wallpaper",
+            "title": "Gerenciamento de Wallpapers",
+            "wave": "W0-DESKTOP-SHELL",
+            "surface": "Personalização do Desktop",
+            "app_template": "Desktop Context",
+            "primary_actor": "anonymous-visitor",
+            "supporting_actors": ["demo-community-contributor"],
+            "jtbd": "WHEN quero alterar a estética de fundo do desktop I WANT TO ciclar entre wallpapers temáticos do Hedgehog SO I CAN personalizar meu ambiente de trabalho WITHOUT interromper fluxos em andamento.",
+            "inputs": ["Atalho de teclado '\\'"],
+            "outputs": ["Plano de fundo atualizado", "Feedback visual suave de transição"],
+            "expected_outcome": "O wallpaper é atualizado no canvas de fundo mantendo nitidez em alta resolução.",
+            "gaps": ["Imagens de wallpaper pesadas podem demandar pré-carregamento."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-004-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-004-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-004-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-004-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-004-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-005",
+            "route": "/taskbar-menu",
+            "title": "Menu Iniciar e Navegação Global",
+            "wave": "W0-DESKTOP-SHELL",
+            "surface": "Navegação Global",
+            "app_template": "TaskBarMenu",
+            "primary_actor": "anonymous-visitor",
+            "supporting_actors": ["demo-product-engineer", "demo-growth-lead"],
+            "jtbd": "WHEN procuro qualquer produto, documentação ou recurso I WANT TO abrir o menu iniciar da barra de tarefas SO I CAN acessar qualquer seção do site em no máximo dois cliques WITHOUT me perder na hierarquia.",
+            "inputs": ["Clique no logo PostHog na barra de tarefas", "Hover em submenus"],
+            "outputs": ["Menu cascata renderizado com ícones e cores por produto", "Submenus aninhados"],
+            "expected_outcome": "Os menus abrem com alinhamento perfeito e animação suave de microinteração.",
+            "gaps": ["Submenus aninhados requerem hover no Chrome real para pintura correta."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-005-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-005-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-005-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-005-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-005-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-006",
+            "route": "/window-manager",
+            "title": "Gerenciamento de Múltiplas Janelas",
+            "wave": "W0-DESKTOP-SHELL",
+            "surface": "Desktop OS Core",
+            "app_template": "App Context",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-data-engineer"],
+            "jtbd": "WHEN realizo tarefas multicontexto I WANT TO abrir múltiplas janelas, redimensioná-las e alternar foco entre elas SO I CAN comparar insights, documentações e logs simultaneamente WITHOUT perder o contexto anterior.",
+            "inputs": ["Arrasto pelo cabeçalho da janela", "Clique nos controles de maximizar/minimizar/fechar"],
+            "outputs": ["Janelas posicionadas com Z-Index atualizado", "Snap lateral ativado"],
+            "expected_outcome": "O usuário organiza seu workspace livremente com persistência de coordenadas.",
+            "gaps": ["Gerenciamento de Z-Index requer cuidado ao abrir muitas janelas simultâneas."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-006-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-006-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-006-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-006-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-006-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-007",
+            "route": "/sparks-joy",
+            "title": "Recursos que Despertam Alegria (Sparks Joy)",
+            "wave": "W0-DESKTOP-SHELL",
+            "surface": "Cultura & Easter Eggs",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-community-contributor",
+            "supporting_actors": ["anonymous-visitor"],
+            "jtbd": "WHEN exploro as nuances da experiência PostHog I WANT TO descobrir recursos divertidos e easter eggs como Hedgehog Mode e Photobooth SO I CAN me engajar com a cultura do produto WITHOUT frieza corporativa.",
+            "inputs": ["Clique no menu Sparks Joy", "Interação com minigames e stickers"],
+            "outputs": ["Animações de confete", "Hedgehog mascote interativo", "Galeria de artes"],
+            "expected_outcome": "Sensação de autenticidade, humor e cuidado artesanal no produto.",
+            "gaps": ["Animações de partículas requerem validação de impacto em dispositivos com baixo poder gráfico."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-007-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-007-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-007-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-007-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-007-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-008",
+            "route": "/product-analytics",
+            "title": "Visão Geral de Product Analytics",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics",
+            "app_template": "<Presentation />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-product-engineer", "demo-executive-sponsor"],
+            "jtbd": "WHEN quero entender os recursos de Product Analytics I WANT TO navegar pela apresentação interativa de slides de produto SO I CAN ver como trends, funis e caminhos funcionam na prática WITHOUT ler manuais extensos.",
+            "inputs": ["Navegação por setas de slide ou teclado", "Clique em chamadas de ação interativas"],
+            "outputs": ["Slides diagramados com gráficos reais", "Exemplos de consultas", "Métricas de caso de uso"],
+            "expected_outcome": "O usuário compreende com clareza como o PostHog substitui ferramentas tradicionais de analytics.",
+            "gaps": ["Breakpoint @2xl alterna layout entre formato paisagem e retrato em mobile."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-008-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-008-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-008-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-008-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-008-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-009",
+            "route": "/product-analytics-explorer",
+            "title": "Explorador de Insights Analíticos",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN quero explorar métricas de uso I WANT TO filtrar eventos, selecionar agregações matemáticas e visualizar tendências temporais SO I CAN identificar variações de tráfego e comportamento WITHOUT escrever código SQL manual.",
+            "inputs": ["Seleção de eventos no dropdown", "Filtro de propriedades", "Seleção de intervalo de datas"],
+            "outputs": [
+                "Gráfico de linhas/barras atualizado",
+                "Tabela de dados detalhada",
+                "Média e percentis calculados"
+            ],
+            "expected_outcome": "Visualização imediata dos dados com legenda clara e capacidade de exportação.",
+            "gaps": ["Renderização de múltiplos gráficos pesados pode exigir debounce em filtros."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-009-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-009-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-009-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-009-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-009-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-010",
+            "route": "/funnels",
+            "title": "Análise de Funis de Conversão",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-executive-sponsor"],
+            "jtbd": "WHEN analiso o fluxo de onboarding dos usuários I WANT TO configurar etapas sequenciais de funil e medir a taxa de abandono entre cada passo SO I CAN otimizar etapas com alto atrito WITHOUT adivinhações.",
+            "inputs": [
+                "Etapas de eventos ordenadas",
+                "Definição de janela de conversão (ex: 14 dias)",
+                "Quebra por propriedade de usuário"
+            ],
+            "outputs": [
+                "Gráfico de funil com percentuais de conversão",
+                "Tempo médio entre etapas",
+                "Lista de usuários que abandonaram"
+            ],
+            "expected_outcome": "Identificação precisa da etapa com maior queda de usuários para priorização de produto.",
+            "gaps": ["Funis com muitas etapas exigem rolagem horizontal em viewports estreitos."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-010-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-010-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-010-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-010-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-010-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-011",
+            "route": "/retention",
+            "title": "Gráficos de Retenção de Cohorts",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-executive-sponsor"],
+            "jtbd": "WHEN avalio a sustentabilidade do produto I WANT TO analisar a curva de retenção de usuários ao longo de dias, semanas ou meses SO I CAN comprovar o product-market fit WITHOUT depender de métricas de vaidade.",
+            "inputs": [
+                "Evento inicial de ativação",
+                "Evento de retorno recorrente",
+                "Granularidade temporal (diária/semanal)"
+            ],
+            "outputs": [
+                "Tabela matricial de cohort N-Day",
+                "Curva de retenção agregada",
+                "Destaque de retenção estável"
+            ],
+            "expected_outcome": "Compreensão exata de qual porcentagem de usuários continua ativa após períodos determinados.",
+            "gaps": ["Matriz de retenção volumosa pode requerer zoom out em telas pequenas."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-011-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-011-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-011-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-011-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-011-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-012",
+            "route": "/user-paths",
+            "title": "Mapeamento de Caminhos de Usuários (User Paths)",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-growth-lead"],
+            "jtbd": "WHEN investigo rotas inesperadas tomadas pelos usuários I WANT TO gerar diagramas de Sankey mostrando caminhos antes e depois de eventos-chave SO I CAN descobrir jornadas não documentadas WITHOUT suposições.",
+            "inputs": [
+                "Evento de partida ou chegada",
+                "Número de etapas de profundidade",
+                "Exclusão de eventos de ruído"
+            ],
+            "outputs": [
+                "Diagrama de fluxo Sankey interativo",
+                "Distribuição percentual de caminhos",
+                "Nós de navegação navegáveis"
+            ],
+            "expected_outcome": "Visualização dos fluxos predominantes e pontos de desvio na aplicação.",
+            "gaps": ["Diagramas Sankey complexos demandam renderização vetorial otimizada."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-012-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-012-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-012-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-012-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-012-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-013",
+            "route": "/stickiness",
+            "title": "Análise de Aderência e Frequência (Stickiness)",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-executive-sponsor"],
+            "jtbd": "WHEN quero medir a fidelidade do usuário I WANT TO analisar a distribuição de quantos dias em um período o usuário realizou uma ação SO I CAN identificar usuários 'power users' e comportamentos habituais WITHOUT métricas agregadas confusas.",
+            "inputs": ["Evento crítico de engajamento", "Janela de observação (ex: 30 dias)", "Critério de repetição"],
+            "outputs": [
+                "Histograma de stickiness por dias ativos",
+                "Percentual de engajamento diário",
+                "Cohorts de alta fidelidade"
+            ],
+            "expected_outcome": "Clareza sobre a frequência com que recursos-chave são consumidos pelo público.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-013-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-013-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-013-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-013-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-013-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-014",
+            "route": "/lifecycle",
+            "title": "Análise de Ciclo de Vida do Usuário (Lifecycle)",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-executive-sponsor"],
+            "jtbd": "WHEN acompanho o crescimento da base de usuários I WANT TO decompor o tráfego em categorias de ciclo de vida (novos, retornando, ressuscitados e dormentes) SO I CAN agir preventivamente contra o churn WITHOUT analisar bases brutas.",
+            "inputs": ["Evento principal de ativação", "Intervalo de recorrência"],
+            "outputs": [
+                "Gráfico de barras empilhadas com saldo líquido de usuários",
+                "Evolução temporal das categorias"
+            ],
+            "expected_outcome": "Visão imediata do balanço entre aquisição, retenção e atrito de usuários.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-014-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-014-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-014-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-014-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-014-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-015",
+            "route": "/dashboards",
+            "title": "Galeria e Gerenciamento de Dashboards",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-executive-sponsor", "demo-platform-admin"],
+            "jtbd": "WHEN consolido relatórios para minha equipe I WANT TO agrupar múltiplos insights em dashboards customizados com filtros sincronizados SO I CAN apresentar um painel executivo unificado WITHOUT duplicar consultas.",
+            "inputs": ["Lista de insights salvos", "Disposição dos cards em grid", "Filtro global de data e cohort"],
+            "outputs": [
+                "Dashboard renderizado com grid responsivo",
+                "Opções de compartilhamento seguro",
+                "Atualização em tempo real"
+            ],
+            "expected_outcome": "Painel completo pronto para apresentações e acompanhamento operacional diário.",
+            "gaps": ["Grid de dashboard deve se reorganizar automaticamente em janelas estreitas."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-015-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-015-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-015-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-015-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-015-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-016",
+            "route": "/sql",
+            "title": "HogQL SQL Explorer",
+            "wave": "W1-PRODUCT-ANALYTICS",
+            "surface": "Product Analytics & Data",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN preciso de análises customizadas não suportadas por interfaces gráficas I WANT TO escrever consultas SQL diretas usando HogQL sobre a tabela de eventos e tabelas do warehouse SO I CAN extrair respostas granulares WITHOUT exportar dados para ferramentas externas.",
+            "inputs": ["Instrução SQL HogQL", "Execução com atalho Ctrl+Enter"],
+            "outputs": [
+                "Tabela de resultados com tipos de dados",
+                "Tempo de execução e bytes lidos",
+                "Gráfico derivado opcional"
+            ],
+            "expected_outcome": "Execução rápida e segura com autocomplete inteligente de propriedades e eventos.",
+            "gaps": ["Autocomplete deve respeitar o schema do projeto sem latência perceptível."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-016-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-016-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-016-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-016-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-016-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-017",
+            "route": "/session-replay",
+            "title": "Visão Geral de Session Replay",
+            "wave": "W2-SESSION-REPLAY",
+            "surface": "Session Replay",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-support-specialist",
+            "supporting_actors": ["demo-product-engineer", "demo-security-reviewer"],
+            "jtbd": "WHEN quero entender a proposta do Session Replay I WANT TO explorar a visão geral com carrossel interativo de casos de uso SO I CAN visualizar como gravações com mascaramento de PII ajudam no diagnóstico de bugs WITHOUT comprometer privacidade.",
+            "inputs": ["Navegação pelos tópicos do menu lateral", "Interação com o carrossel de slides"],
+            "outputs": [
+                "Apresentação de recursos de gravação de tela",
+                "Exemplos visuais de mascaramento",
+                "Depoimentos e métricas"
+            ],
+            "expected_outcome": "Compreensão total dos diferenciais de performance e segurança do player do PostHog.",
+            "gaps": ["Carrossel usa `CarouselSlide` com layout stack/float documentado em README."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-017-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-017-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-017-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-017-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-017-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-018",
+            "route": "/session-replay/player",
+            "title": "Player de Gravação de Sessão e Timeline",
+            "wave": "W2-SESSION-REPLAY",
+            "surface": "Session Replay",
+            "app_template": "<MediaPlayer />",
+            "primary_actor": "demo-support-specialist",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN reproduzo uma sessão de usuário I WANT TO assistir ao replay em canvas interativo com velocidade variável e pular inatividade SO I CAN ver exatamente o que o usuário vivenciou no momento do erro WITHOUT perder tempo com pausas ociosas.",
+            "inputs": ["Play/Pause", "Ajuste de velocidade (1x, 2x, 4x)", "Toggle 'Pular Inatividade'"],
+            "outputs": ["Reconstituição fiel do DOM em iframe protegido", "Timeline com marcadores de cliques e erros"],
+            "expected_outcome": "Reprodução suave do comportamento do usuário com privacidade preservada.",
+            "gaps": ["Iframe do player exige isolamento estrito de sandbox para evitar execução de scripts reais."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-018-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-018-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-018-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-018-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-018-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-019",
+            "route": "/heatmaps",
+            "title": "Mapas de Calor (Heatmaps)",
+            "wave": "W2-SESSION-REPLAY",
+            "surface": "Session Replay & Web",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN analiso a usabilidade de uma página I WANT TO sobrepor mapas de calor de cliques, rolagem e movimento do mouse diretamente sobre a interface SO I CAN saber quais elementos chamam mais atenção WITHOUT precisar assistir a centenas de replays individuais.",
+            "inputs": [
+                "URL da página alvo",
+                "Filtro de período e dispositivo",
+                "Seleção de tipo de heatmap (cliques ou scroll)"
+            ],
+            "outputs": [
+                "Sobreposição visual de mapa de calor colorido",
+                "Percentual de profundidade de scroll",
+                "Contagem de cliques por elemento"
+            ],
+            "expected_outcome": "Diagnóstico imediato de elementos ignorados ou pontos de distração visual.",
+            "gaps": ["Compatibilidade com layouts dinâmicos e SPAs requer sincronização de seletores DOM."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-019-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-019-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-019-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-019-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-019-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-020",
+            "route": "/session-replay/console",
+            "title": "Inspetor de Console da Sessão",
+            "wave": "W2-SESSION-REPLAY",
+            "surface": "Session Replay",
+            "app_template": "Session Drawer",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-support-specialist"],
+            "jtbd": "WHEN investigo um erro durante o replay I WANT TO abrir a gaveta de logs do console sincronizada com o vídeo SO I CAN correlacionar a ação visual com mensagens de erro, avisos e logs de depuração do JavaScript WITHOUT abrir ferramentas externas.",
+            "inputs": ["Clique na aba 'Console' no player de replay", "Filtro por severidade (Error, Warn, Log)"],
+            "outputs": [
+                "Lista de logs com timestamp sincronizado",
+                "Stacktrace expansível",
+                "Destaque no momento exato do erro"
+            ],
+            "expected_outcome": "Localização precisa do erro no código fonte associado ao momento da reprodução.",
+            "gaps": ["Logs volumosos devem possuir virtualização para evitar consumo excessivo de memória."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-020-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-020-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-020-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-020-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-020-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-021",
+            "route": "/session-replay/network",
+            "title": "Inspetor de Rede e Requisições HTTP",
+            "wave": "W2-SESSION-REPLAY",
+            "surface": "Session Replay",
+            "app_template": "Session Drawer",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-support-specialist"],
+            "jtbd": "WHEN depuro uma falha de API durante o replay I WANT TO inspecionar a cascata de requisições de rede (método, status HTTP, duração) SO I CAN verificar se uma resposta 500 ou timeout causou o problema do usuário WITHOUT pedir logs ao cliente.",
+            "inputs": ["Clique na aba 'Network' no player", "Filtro por código de status (ex: 4xx, 5xx)"],
+            "outputs": ["Cascata de requisições (waterfall)", "Cabeçalhos sanitizados", "Tempo de resposta em ms"],
+            "expected_outcome": "Comprovação inequívoca se o erro partiu do backend ou do frontend.",
+            "gaps": ["Payloads sensíveis de request/response devem ser redigidos por padrão."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-021-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-021-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-021-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-021-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-021-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-022",
+            "route": "/replay-vision",
+            "title": "Replay Vision e Detecção Inteligente de Frustração",
+            "wave": "W2-SESSION-REPLAY",
+            "surface": "Session Replay & AI",
+            "app_template": "<Presentation />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-growth-lead"],
+            "jtbd": "WHEN quero encontrar sessões com problemas automaticamente I WANT TO utilizar modelos de visão computacional e heurísticas que detectam rage clicks, dead clicks e loops de frustração SO I CAN priorizar os piores gargalos WITHOUT assistir a gravações aleatórias.",
+            "inputs": ["Filtro de flag 'Rage Clicks' ou 'Frustrated Users'", "Seleção de severidade"],
+            "outputs": [
+                "Lista de gravações pontuadas por nível de frustração",
+                "Clips destacados com o momento exato do atrito"
+            ],
+            "expected_outcome": "Foco imediato nas sessões que realmente demandam correção de produto.",
+            "gaps": ["Modelos de IA requerem amostragem balanceada para evitar falsos positivos."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-022-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-022-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-022-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-022-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-022-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-023",
+            "route": "/session-replay/sharing",
+            "title": "Compartilhamento Seguro de Gravações",
+            "wave": "W2-SESSION-REPLAY",
+            "surface": "Session Replay & Colaboração",
+            "app_template": "Share Modal",
+            "primary_actor": "demo-support-specialist",
+            "supporting_actors": ["demo-product-engineer", "demo-security-reviewer"],
+            "jtbd": "WHEN compartilho uma evidência com o time de engenharia I WANT TO gerar um link protegido por autenticação com timestamp exato do incidente SO I CAN acelerar o ciclo de correção WITHOUT vazar dados para pessoas não autorizadas.",
+            "inputs": ["Clique em 'Share'", "Opção de incluir timestamp atual", "Definição de expiração do link"],
+            "outputs": ["URL segura gerada para a área de transferência", "Confirmação visual de cópia"],
+            "expected_outcome": "O colega de equipe abre o link e cai exatamente no segundo do vídeo onde o bug acontece.",
+            "gaps": ["Links públicos devem ser desabilitados por padrão em organizações corporativas."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-023-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-023-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-023-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-023-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-023-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-024",
+            "route": "/feature-flags",
+            "title": "Visão Geral e Catálogo de Feature Flags",
+            "wave": "W3-FLAGS-EXPERIMENTS",
+            "surface": "Feature Flags",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-growth-lead"],
+            "jtbd": "WHEN gerencio lançamentos de novas funcionalidades I WANT TO visualizar a lista de todas as Feature Flags, seu estado ativo/inativo e percentual de liberação SO I CAN manter governança sobre o código em produção WITHOUT deploys arriscados.",
+            "inputs": ["Busca por chave de flag", "Filtro por status (Ativa, Inativa, Arquivada)"],
+            "outputs": ["Tabela com chaves de flags, criador, taxa de rollout e data de atualização"],
+            "expected_outcome": "Visão transparente de todas as ramificações de features ativas no sistema.",
+            "gaps": ["Flags obsoletas devem exibir aviso de sugestão de arquivamento."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-024-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-024-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-024-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-024-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-024-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-025",
+            "route": "/feature-flags/create",
+            "title": "Criação e Configuração de Feature Flag",
+            "wave": "W3-FLAGS-EXPERIMENTS",
+            "surface": "Feature Flags",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-growth-lead"],
+            "jtbd": "WHEN crio uma nova flag no PostHog I WANT TO definir regras de segmentação por propriedade de usuário, cohort e porcentagem de liberação gradual SO I CAN fazer canary releases controlados WITHOUT expor 100% dos usuários a código novo.",
+            "inputs": [
+                "Chave única (ex: `beta-checkout-v2`)",
+                "Descrição não técnica",
+                "Critérios de rollout (ex: 20% do time interno)"
+            ],
+            "outputs": [
+                "Flag criada e propagada para o endpoint /decide/",
+                "Snippet de código gerado no idioma do SDK"
+            ],
+            "expected_outcome": "A flag entra em vigor imediatamente e começa a avaliar requisições de clientes.",
+            "gaps": ["Validação de sintaxe da chave para evitar caracteres inválidos."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-025-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-025-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-025-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-025-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-025-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-026",
+            "route": "/feature-flags/variants",
+            "title": "Configuração de Variantes e Payloads JSON",
+            "wave": "W3-FLAGS-EXPERIMENTS",
+            "surface": "Feature Flags",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-growth-lead"],
+            "jtbd": "WHEN implemento múltiplas opções de uma mesma feature I WANT TO cadastrar variantes nomeadas com pesos percentuais e payloads JSON customizados SO I CAN parametrizar o comportamento da interface pelo servidor WITHOUT novo deploy.",
+            "inputs": [
+                "Nome das variantes (ex: `control`, `variant-a`, `variant-b`)",
+                "Pesos relativos",
+                "Payload JSON associado"
+            ],
+            "outputs": ["Matriz de variantes configurada", "Validação sintática do JSON em tempo real"],
+            "expected_outcome": "SDK recebe a variante avaliada juntamente com o payload JSON parseado.",
+            "gaps": ["Editor de JSON deve acusar erros de sintaxe antes de salvar."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-026-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-026-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-026-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-026-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-026-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-027",
+            "route": "/early-access-features",
+            "title": "Gerenciamento de Recursos em Acesso Antecipado",
+            "wave": "W3-FLAGS-EXPERIMENTS",
+            "surface": "Feature Flags & Growth",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN quero que usuários escolham participar de testes beta I WANT TO expor flags como programas de 'Early Access' com opt-in na UI SO I CAN coletar feedback de early adopters WITHOUT gerenciar listas manuais de e-mails.",
+            "inputs": [
+                "Seleção de flag existente",
+                "Título público e descrição do recurso",
+                "Regra de opt-in automático ou manual"
+            ],
+            "outputs": ["Card de recurso em Early Access publicado", "Contagem de usuários inscritos em tempo real"],
+            "expected_outcome": "Usuários podem ativar/desativar o recurso diretamente nas preferências da aplicação.",
+            "gaps": ["Sincronização com componentes de UI clientes via SDK."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-027-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-027-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-027-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-027-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-027-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-028",
+            "route": "/experiments",
+            "title": "Visão Geral de Experimentos e Testes A/B",
+            "wave": "W3-FLAGS-EXPERIMENTS",
+            "surface": "Experiments",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-executive-sponsor"],
+            "jtbd": "WHEN quero validar hipóteses de melhoria de produto I WANT TO consultar todos os testes A/B ativos, pausados e concluídos SO I CAN acompanhar o progresso de validação estatística WITHOUT ferramentas desconectadas de experimentação.",
+            "inputs": ["Filtro de busca de experimentos", "Status (Running, Draft, Concluded)"],
+            "outputs": [
+                "Grid de experimentos com métrica principal, contagem de participantes e probabilidade de vitória"
+            ],
+            "expected_outcome": "Visão consolidada do programa de experimentação da empresa.",
+            "gaps": ["Indicação visual clara de significância estatística alcançada."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-028-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-028-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-028-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-028-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-028-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-029",
+            "route": "/experiments/create",
+            "title": "Configuração de Experimento e Métrica Primária",
+            "wave": "W3-FLAGS-EXPERIMENTS",
+            "surface": "Experiments",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN estruturo um novo teste A/B I WANT TO definir variantes, meta primária de conversão, métricas secundárias e tamanho amostral recomendado SO I CAN executar um teste metodologicamente rigoroso WITHOUT viés estatístico.",
+            "inputs": [
+                "Nome do teste e hipótese",
+                "Métrica de conversão ou contínua",
+                "Duração recomendada e MDE (Minimum Detectable Effect)"
+            ],
+            "outputs": ["Calculadora amostral integrada", "Feature flag subjacente criada automaticamente"],
+            "expected_outcome": "Experimento lançado com distribuição uniforme e rastreamento rigoroso.",
+            "gaps": ["Calculadora de tamanho de amostra deve considerar o tráfego histórico do evento."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-029-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-029-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-029-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-029-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-029-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-030",
+            "route": "/experiments/results",
+            "title": "Relatório de Resultados e Significância Bayesiana",
+            "wave": "W3-FLAGS-EXPERIMENTS",
+            "surface": "Experiments",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-executive-sponsor", "demo-product-engineer"],
+            "jtbd": "WHEN avalio o desfecho de um experimento I WANT TO analisar a probabilidade de vitória de cada variante, intervalo de credibilidade e impacto percentual SO I CAN tomar uma decisão segura de lançar ou cancelar a variante WITHOUT dúvidas estatísticas.",
+            "inputs": ["Seleção do experimento concluído", "Filtro de quebra por segmento de usuário"],
+            "outputs": [
+                "Gráfico de densidade de probabilidade Bayesiana",
+                "Tabela comparativa de conversão",
+                "Botão de 'Rollout 100%' da variante vencedora"
+            ],
+            "expected_outcome": "Decisão de produto fundamentada em evidências quantitativas com 1 clique para implementação definitiva.",
+            "gaps": ["Aviso de 'amostra insuficiente' caso a significância não atinja o limiar seguro."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-030-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-030-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-030-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-030-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-030-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-031",
+            "route": "/cdp",
+            "title": "Visão Geral de Customer Data Platform (CDP)",
+            "wave": "W4-CDP-PIPELINES",
+            "surface": "Customer Data Platform",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN preciso conectar dados de ponta a ponta I WANT TO explorar a arquitetura da Customer Data Platform do PostHog SO I CAN entender como fontes, transformações e destinos se conectam em tempo real WITHOUT pipelines frágeis de terceiros.",
+            "inputs": ["Navegação pelas seções do CDP", "Consulta de fluxos de dados"],
+            "outputs": [
+                "Diagrama visual da esteira de dados",
+                "Lista de integrações prontas",
+                "Documentação de Hog Functions"
+            ],
+            "expected_outcome": "Visão unificada da esteira de dados de eventos do PostHog.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-031-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-031-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-031-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-031-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-031-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-032",
+            "route": "/docs/cdp/sources",
+            "title": "Catálogo de Fontes de Dados e SDKs",
+            "wave": "W4-CDP-PIPELINES",
+            "surface": "CDP Sources",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-data-engineer"],
+            "jtbd": "WHEN vou instrumentar uma nova aplicação I WANT TO consultar o catálogo de SDKs oficiais (JavaScript, Python, Node, iOS, Android, React Native, Go) SO I CAN instalar a biblioteca correta com configuração recomendada WITHOUT erros de inicialização.",
+            "inputs": ["Seleção da linguagem ou framework", "Cópia do comando de instalação"],
+            "outputs": [
+                "Instruções passo a passo de instalação",
+                "Snippets de inicialização com chave pública",
+                "Exemplos de envio de eventos"
+            ],
+            "expected_outcome": "SDK integrado e primeiro evento disparado em menos de 5 minutos.",
+            "gaps": ["Snippets devem conter placeholders claros para `[PROJECT_API_KEY]`."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-032-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-032-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-032-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-032-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-032-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-033",
+            "route": "/docs/cdp/destinations",
+            "title": "Gerenciamento de Destinos em Tempo Real",
+            "wave": "W4-CDP-PIPELINES",
+            "surface": "CDP Destinations",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-growth-lead", "demo-cdp-webhook-sink"],
+            "jtbd": "WHEN eventos acontecem na aplicação I WANT TO encaminhar dados filtrados instantaneamente para sistemas externos como Slack, HubSpot, Customer.io ou webhooks HTTP SO I CAN manter ferramentas de marketing sincronizadas WITHOUT criar integrações proprietárias.",
+            "inputs": [
+                "Seleção do destino",
+                "Configuração de filtros de eventos",
+                "URL de webhook e segredo de autenticação"
+            ],
+            "outputs": ["Destino ativo", "Painel de métricas de entrega em tempo real", "Logs de eventos entregues"],
+            "expected_outcome": "Eventos entregues com latência submétrica e garantia de retry com backoff.",
+            "gaps": ["Segredos de webhook não devem ser exibidos após salvos na interface."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-033-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-033-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-033-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-033-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-033-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-034",
+            "route": "/docs/cdp/hog-functions",
+            "title": "Editor de Transformações Hog Functions",
+            "wave": "W4-CDP-PIPELINES",
+            "surface": "CDP Transformations",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-product-engineer", "demo-hog-function-runtime"],
+            "jtbd": "WHEN preciso transformar ou enriquecer eventos no fluxo de ingestão I WANT TO escrever pequenas funções em código Hog com tipagem e testes integrados SO I CAN limpar dados e anonimizar IPs antes da persistência WITHOUT manter serviços serverless externos.",
+            "inputs": ["Código fonte Hog", "Payload de evento de teste para simulação"],
+            "outputs": [
+                "Console de execução com logs de depuração",
+                "Validação sintática instantânea",
+                "Evento resultante transformado"
+            ],
+            "expected_outcome": "Função compilada para bytecode e executada em sandbox isolado.",
+            "gaps": ["Erros de sintaxe em tempo de edição devem apontar número de linha exato."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-034-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-034-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-034-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-034-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-034-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-035",
+            "route": "/docs/cdp/hog-functions-ai",
+            "title": "Criação de Hog Functions com PostHog AI",
+            "wave": "W4-CDP-PIPELINES",
+            "surface": "CDP & AI",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-ai-engineer"],
+            "jtbd": "WHEN quero automatizar a criação de transformações I WANT TO descrever a regra em linguagem natural para o PostHog AI gerar o código Hog pronto SO I CAN economizar tempo de desenvolvimento WITHOUT consultar a gramática da linguagem manualmente.",
+            "inputs": [
+                "Prompt em linguagem natural (ex: 'Mascare os últimos 4 dígitos do CPF')",
+                "Clique em 'Gerar Função'"
+            ],
+            "outputs": ["Código Hog gerado com comentários explicativos", "Casos de teste sintéticos para validação"],
+            "expected_outcome": "Código gerado com precisão e pronto para teste em sandbox.",
+            "gaps": ["Exigência de revisão humana antes da ativação em produção."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-035-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-035-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-035-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-035-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-035-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-036",
+            "route": "/docs/cdp/sources/incoming-webhooks",
+            "title": "Configuração de Webhooks de Entrada",
+            "wave": "W4-CDP-PIPELINES",
+            "surface": "CDP Sources",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN recebo eventos de servidores de terceiros (Stripe, GitHub, Shopify) I WANT TO configurar uma URL HTTPS de webhook no PostHog que valida e ingere os payloads automaticamente SO I CAN correlacionar eventos de backend com o comportamento do frontend WITHOUT criar proxies intermediários.",
+            "inputs": [
+                "Nome do webhook",
+                "Configuração de mapeamento de propriedades",
+                "Segredo para validação de cabeçalho"
+            ],
+            "outputs": ["Endpoint HTTPS gerado exclusivo para o projeto", "Log das últimas requisições recebidas"],
+            "expected_outcome": "Ingestão imediata com conversão do payload JSON em eventos estruturados.",
+            "gaps": ["Rate limiting agressivo deve ser configurável para picos legítimos."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-036-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-036-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-036-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-036-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-036-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-037",
+            "route": "/docs/cdp/surfaces/mcp",
+            "title": "Integração com Servidor Model Context Protocol (MCP)",
+            "wave": "W4-CDP-PIPELINES",
+            "surface": "CDP & AI Surfaces",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-ai-engineer",
+            "supporting_actors": ["demo-product-engineer", "demo-mcp-agent"],
+            "jtbd": "WHEN utilizo assistentes de IA (Claude, Cursor, Antigravity) no meu fluxo de desenvolvimento I WANT TO conectar meu ambiente ao servidor MCP do PostHog SO I CAN consultar dados de produto, rodar queries HogQL e verificar documentações diretamente pelo editor WITHOUT trocar de contexto.",
+            "inputs": ["Configuração do arquivo `mcp_config.json`", "Token de autenticação pessoal"],
+            "outputs": ["Ferramentas MCP registradas no cliente de IA", "Logs de chamadas de ferramentas seguras"],
+            "expected_outcome": "Interação fluida com o PostHog a partir da IDE com validação de escopo.",
+            "gaps": ["Tokens devem possuir escopos granulares de leitura/escrita."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-037-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-037-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-037-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-037-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-037-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-038",
+            "route": "/docs/cdp/surfaces/desktop",
+            "title": "Integração e Telemetria via PostHog Desktop",
+            "wave": "W4-CDP-PIPELINES",
+            "surface": "CDP Surfaces",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-platform-admin"],
+            "jtbd": "WHEN opero aplicativos de desktop ou arquiteturas locais I WANT TO utilizar o client PostHog Desktop com suporte a buffer local e comunicação IPC segura SO I CAN coletar telemetria confiável em aplicações offline-first WITHOUT perda de eventos em reinicializações.",
+            "inputs": ["Instalação do pacote `@posthog/desktop`", "Configuração de persistência local"],
+            "outputs": ["Guia arquitetural de implementação", "Instruções de segurança de IPC"],
+            "expected_outcome": "Telemetria robusta em ambientes desktop (Electron, Tauri, React Native).",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-038-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-038-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-038-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-038-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-038-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-039",
+            "route": "/data-warehouse",
+            "title": "Visão Geral de Data Warehouse Unificado",
+            "wave": "W5-DATA-WAREHOUSE",
+            "surface": "Data Warehouse",
+            "app_template": "<Presentation />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-growth-lead", "demo-executive-sponsor"],
+            "jtbd": "WHEN preciso unir dados analíticos com dados de negócio I WANT TO entender a capacidade do Data Warehouse do PostHog de consultar dados internos e externos em uma única camada SQL SO I CAN dispensar a manutenção de data warehouses caros e complexos WITHOUT perder flexibilidade analítica.",
+            "inputs": ["Navegação pelos slides de apresentação", "Consulta de diagramas arquiteturais"],
+            "outputs": [
+                "Apresentação visual da arquitetura de Data Warehouse",
+                "Exemplos de queries cruzadas com Stripe e Postgres"
+            ],
+            "expected_outcome": "Compreensão da economia de custos e simplificação da stack de dados.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-039-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-039-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-039-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-039-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-039-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-040",
+            "route": "/context-warehouse",
+            "title": "Context Warehouse e Modelagem Semântica",
+            "wave": "W5-DATA-WAREHOUSE",
+            "surface": "Data Warehouse",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-ai-engineer"],
+            "jtbd": "WHEN preparo dados para agentes de IA e analistas I WANT TO navegar pela documentação e tabelas do Context Warehouse usando TreeMenu lateral SO I CAN enriquecer dados de eventos com entidades semânticas de clientes WITHOUT retrabalho de modelagem.",
+            "inputs": ["Navegação pela árvore de menu lateral", "Consulta de definições de entidades"],
+            "outputs": ["Documentação técnica com exemplos de relacionamentos", "Estrutura de tabelas semânticas"],
+            "expected_outcome": "Modelo semântico claro para consumo por humanos e agentes de IA.",
+            "gaps": ["LeftSidebarContent preenchido via `<TreeMenu />` com suporte a expansão/recolhimento."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-040-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-040-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-040-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-040-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-040-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-041",
+            "route": "/data-warehouse/connectors",
+            "title": "Configuração de Conectores Externos (S3, BigQuery, Snowflake, Stripe)",
+            "wave": "W5-DATA-WAREHOUSE",
+            "surface": "Data Warehouse",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-data-warehouse-connector"],
+            "jtbd": "WHEN quero cruzar dados de receita ou produção I WANT TO conectar meu bucket S3, Snowflake, BigQuery ou conta Stripe diretamente no PostHog SO I CAN sincronizar tabelas externas automaticamente WITHOUT escrever scripts ETL customizados.",
+            "inputs": [
+                "Credenciais da fonte externa (sanitizadas)",
+                "Filtro de tabelas e prefixos de arquivo (Parquet, CSV, JSON)"
+            ],
+            "outputs": ["Conexão testada com sucesso", "Mapeamento automático de colunas e tipos de dados"],
+            "expected_outcome": "Fonte externa conectada e agendamento de sincronização ativado.",
+            "gaps": ["Credenciais devem ser testadas em dry-run antes da ativação."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-041-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-041-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-041-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-041-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-041-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-042",
+            "route": "/data-warehouse/views",
+            "title": "Modelagem de Visões e Joins de Eventos",
+            "wave": "W5-DATA-WAREHOUSE",
+            "surface": "Data Warehouse",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-growth-lead"],
+            "jtbd": "WHEN crio métricas avançadas I WANT TO salvar consultas SQL como Visões Virtuais e realizar JOINs entre tabelas externas e a tabela de eventos do PostHog SO I CAN disponibilizar essas entidades calculadas para uso em funis e insights gráficos WITHOUT duplicação de dados.",
+            "inputs": ["Definição SQL da visão com JOINs", "Nome da visão virtual (ex: `view_customer_ltv`)"],
+            "outputs": ["Visão virtual salva e disponível no dropdown de insights de Product Analytics"],
+            "expected_outcome": "Analistas podem usar a visão no construtor de insights visual sem tocar em SQL.",
+            "gaps": ["Validação de desempenho de JOINs para alertar sobre escaneamento excessivo."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-042-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-042-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-042-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-042-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-042-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-043",
+            "route": "/data-warehouse/sync-history",
+            "title": "Histórico de Sincronizações e Logs de Ingestão",
+            "wave": "W5-DATA-WAREHOUSE",
+            "surface": "Data Warehouse",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-platform-admin"],
+            "jtbd": "WHEN monitoro a saúde dos pipelines de dados I WANT TO auditar o histórico de sincronização de cada conector com contagem de linhas, bytes transferidos e duração SO I CAN agir rapidamente em caso de falhas de schema ou timeout WITHOUT impacto nos relatórios.",
+            "inputs": ["Filtro por conector externo", "Filtro por status de execução (Success, Failed, Running)"],
+            "outputs": ["Tabela com execuções históricas", "Logs detalhados de erros de sincronização"],
+            "expected_outcome": "Visibilidade total do estado de atualização dos dados externos.",
+            "gaps": ["Logs de erro devem indicar a linha/coluna exata do dado com falha."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-043-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-043-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-043-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-043-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-043-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-044",
+            "route": "/data-warehouse/batch-exports",
+            "title": "Exportações em Batch (Batch Exports)",
+            "wave": "W5-DATA-WAREHOUSE",
+            "surface": "Data Warehouse",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-data-engineer",
+            "supporting_actors": ["demo-security-reviewer"],
+            "jtbd": "WHEN mantenho cópias de segurança ou arquivos históricos I WANT TO configurar exportações em lote periódicas de todos os eventos para S3 ou GCS em formato Parquet particionado SO I CAN garantir retenção de longo prazo e alimentar data lakes corporativos WITHOUT sobrecarregar a infraestrutura.",
+            "inputs": [
+                "Destino de armazenamento (S3/GCS)",
+                "Intervalo de exportação (horário/diário)",
+                "Nível de compressão"
+            ],
+            "outputs": ["Pipeline de batch export ativo com métricas de bytes enviados e agendamento confirmado"],
+            "expected_outcome": "Exportação contínua, idempotente e particionada por data.",
+            "gaps": ["Políticas de criptografia em repouso (SSE-KMS) devem ser validadas."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-044-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-044-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-044-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-044-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-044-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-045",
+            "route": "/ai-observability",
+            "title": "Visão Geral de AI Observability & LLM Analytics",
+            "wave": "W6-AI-ERROR-TRACKING",
+            "surface": "AI Observability",
+            "app_template": "<Presentation />",
+            "primary_actor": "demo-ai-engineer",
+            "supporting_actors": ["demo-product-engineer", "demo-executive-sponsor"],
+            "jtbd": "WHEN desenvolvo produtos baseados em IA generativa I WANT TO entender a suite de observabilidade de LLMs do PostHog SO I CAN rastrear custos de tokens, latência de inferência, qualidade de prompts e falhas de agentes WITHOUT integrar ferramentas separadas de LLM monitoring.",
+            "inputs": ["Navegação pelos slides de apresentação", "Exemplos de traces de chamadas OpenAI e Anthropic"],
+            "outputs": ["Apresentação interativa com métricas de IA", "Visão geral de spans e gestão de prompts"],
+            "expected_outcome": "Clareza sobre o monitoramento unificado de telemetria de produto e IA.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-045-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-045-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-045-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-045-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-045-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-046",
+            "route": "/ai-observability/traces",
+            "title": "Visualização de Traces e Spans de Chamadas LLM",
+            "wave": "W6-AI-ERROR-TRACKING",
+            "surface": "AI Observability",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-ai-engineer",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN depuro uma cadeia complexa de agentes ou chamadas RAG I WANT TO visualizar a árvore hierárquica de spans de execução com tempo de resposta, parâmetros e tokens de cada etapa SO I CAN identificar gargalos de latência e alucinações WITHOUT inserir logs manuais de depuração.",
+            "inputs": ["ID do trace de inferência", "Filtro por modelo (ex: `gpt-4o`, `claude-3-5-sonnet`)"],
+            "outputs": [
+                "Visualização em árvore de spans de execução",
+                "Payload de entrada e saída de cada span com contagem de tokens"
+            ],
+            "expected_outcome": "Depuração ponta a ponta da execução do agente de IA com contexto total.",
+            "gaps": ["Traces muito profundos devem possuir recolhimento automático de nós secundários."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-046-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-046-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-046-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-046-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-046-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-047",
+            "route": "/ai-observability/prompts",
+            "title": "Prompt Management e Versionamento de Templates",
+            "wave": "W6-AI-ERROR-TRACKING",
+            "surface": "AI Observability",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-ai-engineer",
+            "supporting_actors": ["demo-growth-lead"],
+            "jtbd": "WHEN itero sobre instruções de modelos de IA I WANT TO versionar templates de prompt na interface, testar variantes e disparar rollouts controlados SO I CAN melhorar a qualidade das respostas WITHOUT alterar o código fonte da aplicação.",
+            "inputs": [
+                "Template de prompt com variáveis (ex: `{{user_name}}`)",
+                "Seleção de modelo e temperatura",
+                "Versionamento semântico"
+            ],
+            "outputs": [
+                "Versão do prompt salva e pronta para consumo via SDK",
+                "Histórico de alterações com diff de texto"
+            ],
+            "expected_outcome": "Governança ágil de prompts com capacidade de rollback imediato.",
+            "gaps": ["Suporte a testes A/B de prompts integrado ao módulo de experimentos."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-047-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-047-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-047-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-047-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-047-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-048",
+            "route": "/ai-observability/costs",
+            "title": "Análise de Custos e Consumo de Tokens",
+            "wave": "W6-AI-ERROR-TRACKING",
+            "surface": "AI Observability",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-ai-engineer",
+            "supporting_actors": ["demo-executive-sponsor", "demo-platform-admin"],
+            "jtbd": "WHEN monitoro as despesas de infraestrutura de IA I WANT TO visualizar o consumo acumulado de tokens de entrada e saída discriminado por modelo, usuário e funcionalidade SO I CAN evitar custos descontrolados de API WITHOUT limitar o crescimento do produto.",
+            "inputs": ["Intervalo temporal de faturamento", "Quebra por modelo e usuário"],
+            "outputs": [
+                "Gráfico de custos acumulados em dólares",
+                "Média de custo por sessão de usuário",
+                "Alertas de anomalia de gastos"
+            ],
+            "expected_outcome": "Previsibilidade financeira total sobre a operação de IA.",
+            "gaps": ["Tabela de preços de tokens deve ser atualizada conforme os anúncios dos provedores."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-048-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-048-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-048-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-048-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-048-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-049",
+            "route": "/error-tracking",
+            "title": "Visão Geral e Painel de Rastreamento de Erros",
+            "wave": "W6-AI-ERROR-TRACKING",
+            "surface": "Error Tracking",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-support-specialist"],
+            "jtbd": "WHEN monitoro a estabilidade da aplicação I WANT TO visualizar erros agrupados por impressão digital única com contagem de ocorrências e usuários afetados SO I CAN priorizar os bugs mais críticos WITHOUT ser inundado por alertas duplicados.",
+            "inputs": [
+                "Filtro por ambiente (production, staging)",
+                "Ordenação por 'Usuários Afetados' ou 'Mais Recentes'"
+            ],
+            "outputs": [
+                "Lista agregada de erros com status (Aberto, Resolvido, Ignorado)",
+                "Gráfico de frequência de ocorrência"
+            ],
+            "expected_outcome": "Fila de erros priorizada com visibilidade do impacto real em clientes.",
+            "gaps": ["Agrupamento inteligente de stacktraces semelhantes."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-049-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-049-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-049-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-049-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-049-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-050",
+            "route": "/error-tracking/issue-detail",
+            "title": "Detalhe de Exceção com Stacktrace e Source Maps",
+            "wave": "W6-AI-ERROR-TRACKING",
+            "surface": "Error Tracking",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["demo-support-specialist"],
+            "jtbd": "WHEN analiso um erro específico I WANT TO visualizar o stacktrace desofuscado com source maps, variáveis de contexto e link direto para o Session Replay da ocorrência SO I CAN identificar a linha exata do código com defeito WITHOUT reproduzir o bug manualmente.",
+            "inputs": ["Clique no erro na lista", "Upload de source maps associados à versão"],
+            "outputs": [
+                "Código fonte desofuscado com linha em destaque",
+                "Link para gravação de sessão correlacionada",
+                "Dispositivo, OS e navegador"
+            ],
+            "expected_outcome": "Causa raiz identificada em segundos com contexto visual completo.",
+            "gaps": ["Upload de source maps requer chave de release compatível."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-050-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-050-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-050-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-050-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-050-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-051",
+            "route": "/logs",
+            "title": "Painel de Logs em Tempo Real",
+            "wave": "W6-AI-ERROR-TRACKING",
+            "surface": "Logs & Observability",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-platform-admin",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN investigo um incidente em produção I WANT TO consultar o streaming de logs estruturados em tempo real com filtros por serviço, severidade e consulta HogQL SO I CAN entender a sequência exata de eventos de sistema WITHOUT acessar servidores via SSH.",
+            "inputs": ["Consulta de busca de logs", "Seleção de janela temporal e severidade"],
+            "outputs": ["Tabela de logs com streaming em tempo real", "Visualização JSON expansível de propriedades"],
+            "expected_outcome": "Diagnóstico rápido de problemas de infraestrutura e aplicação.",
+            "gaps": ["Virtualização de linhas no streaming para evitar consumo excessivo de CPU."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-051-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-051-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-051-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-051-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-051-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-052",
+            "route": "/surveys",
+            "title": "Visão Geral de Pesquisas na Aplicação (Surveys)",
+            "wave": "W7-SURVEYS-GROWTH",
+            "surface": "Surveys",
+            "app_template": "<Presentation />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-support-specialist"],
+            "jtbd": "WHEN planejo coletar feedback de usuários I WANT TO conhecer os formatos de pesquisas in-app suportados (NPS, CSAT, formulários abertos) SO I CAN engajar usuários no momento certo WITHOUT ferramentas externas intrusivas.",
+            "inputs": ["Navegação pela apresentação de pesquisas", "Exemplos de layouts de popups e widgets"],
+            "outputs": ["Apresentação de capacidades de pesquisas", "Exemplos de gatilhos comportamentais"],
+            "expected_outcome": "Compreensão de como disparar pesquisas baseadas em eventos e cohorts.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-052-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-052-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-052-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-052-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-052-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-053",
+            "route": "/surveys/create",
+            "title": "Configuração e Criação de Pesquisa In-App",
+            "wave": "W7-SURVEYS-GROWTH",
+            "surface": "Surveys",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN crio uma nova pesquisa I WANT TO customizar o texto das perguntas, opções de resposta, posicionamento visual na tela e condições de disparo (ex: após 3 visualizações de página) SO I CAN coletar feedback contextualizado WITHOUT irritar o usuário.",
+            "inputs": [
+                "Tipo de pesquisa (NPS, Rating, Text)",
+                "Texto da pergunta e agradecimento",
+                "Critérios de segmentação de público"
+            ],
+            "outputs": ["Preview interativo da pesquisa na tela", "Pesquisa pronta para ativação via SDK"],
+            "expected_outcome": "Pesquisa publicada que se integra organicamente ao design da aplicação cliente.",
+            "gaps": ["Preview em tempo real deve refletir o tema claro/escuro do cliente."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-053-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-053-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-053-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-053-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-053-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-054",
+            "route": "/surveys/results",
+            "title": "Análise de Respostas de Pesquisa e Sentimento",
+            "wave": "W7-SURVEYS-GROWTH",
+            "surface": "Surveys",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-support-specialist", "demo-executive-sponsor"],
+            "jtbd": "WHEN avalio o feedback coletado I WANT TO ver a pontuação calculada de NPS/CSAT, distribuição de notas e análise de sentimento em respostas de texto SO I CAN identificar temas recorrentes de satisfação e insatisfação WITHOUT ler manualmente centenas de respostas.",
+            "inputs": ["Seleção da pesquisa ativa", "Filtro de notas (Detratores, Neutros, Promotores)"],
+            "outputs": [
+                "Score consolidado de NPS com intervalo de confiança",
+                "Nuvem de palavras e resumo de sentimentos gerado por IA",
+                "Tabela de respostas individuais"
+            ],
+            "expected_outcome": "Diagnóstico qualitativo e quantitativo imediato da satisfação do cliente.",
+            "gaps": ["Análise de sentimento requer IA configurada no projeto."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-054-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-054-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-054-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-054-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-054-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-055",
+            "route": "/web-analytics",
+            "title": "Web Analytics Otimizado para Performance",
+            "wave": "W7-SURVEYS-GROWTH",
+            "surface": "Web Analytics",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-executive-sponsor"],
+            "jtbd": "WHEN acompanho métricas essenciais do site público I WANT TO utilizar um painel direto e ultra-rápido de Web Analytics (visitantes únicos, páginas mais vistas, canais de aquisição, países) SO I CAN ter visão instantânea do tráfego WITHOUT a lentidão e complexidade do Google Analytics.",
+            "inputs": ["Filtro de período (Hoje, 7D, 30D)", "Filtro por canal de marketing ou país"],
+            "outputs": [
+                "Cards de visitantes únicos, sessões e taxa de rejeição",
+                "Tabelas de principais caminhos, origens e dispositivos"
+            ],
+            "expected_outcome": "Carregamento instantâneo das métricas de tráfego com privacidade por padrão.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-055-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-055-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-055-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-055-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-055-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-056",
+            "route": "/workflows",
+            "title": "Workflows e Automações de Eventos",
+            "wave": "W7-SURVEYS-GROWTH",
+            "surface": "Workflows & Automations",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-growth-lead",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN ocorrem gatilhos de comportamento do usuário I WANT TO disparar sequências de automação (e-mails, mensagens in-app, webhooks) com regras condicionais SO I CAN reengajar usuários inativos automaticamente WITHOUT ferramentas separadas de automação de marketing.",
+            "inputs": ["Gatilho inicial de evento", "Passos de ação sequenciais e temporizadores de espera"],
+            "outputs": ["Fluxograma visual do workflow", "Status de execução e contagem de usuários em cada etapa"],
+            "expected_outcome": "Automações orientadas a eventos operando com confiabilidade.",
+            "gaps": ["Editor visual de automações baseado em ReactFlow."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-056-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-056-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-056-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-056-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-056-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-057",
+            "route": "/vibe-check",
+            "title": "Wizard Interativo de Vibe Check e Recomendação",
+            "wave": "W7-SURVEYS-GROWTH",
+            "surface": "Interactive Tools",
+            "app_template": "<Wizard />",
+            "primary_actor": "anonymous-visitor",
+            "supporting_actors": ["demo-product-engineer"],
+            "jtbd": "WHEN avalio quais ferramentas da stack PostHog fazem sentido para meu projeto I WANT TO responder a um quiz interativo de perguntas curtas SO I CAN receber uma recomendação personalizada de produtos e estimativa de esforço WITHOUT navegar por dezenas de páginas.",
+            "inputs": ["Respostas de múltipla escolha nos passos do Wizard", "Clique em 'Avançar'"],
+            "outputs": [
+                "Tela final com plano recomendado",
+                "Lista de produtos ideais para o perfil",
+                "Botão de início rápido"
+            ],
+            "expected_outcome": "Recomendação assertiva e lúdica que acelera o processo de decisão do usuário.",
+            "gaps": ["Wizard implementado em `src/pages/vibe-check/index.tsx` com navegação de slides."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-057-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-057-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-057-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-057-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-057-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-058",
+            "route": "/pricing",
+            "title": "Calculadora Interativa de Faturamento e Preços",
+            "wave": "W8-GOVERNANCE-COMMUNITY",
+            "surface": "Billing & Pricing",
+            "app_template": "Pricing Calculator",
+            "primary_actor": "anonymous-visitor",
+            "supporting_actors": ["demo-executive-sponsor", "demo-platform-admin"],
+            "jtbd": "WHEN planejo o orçamento para contratação do PostHog I WANT TO ajustar controles deslizantes de volume para cada produto (eventos, replays, traces de IA) SO I CAN prever o custo exato mensal com tier gratuito aplicado WITHOUT surpresas de cobrança.",
+            "inputs": ["Sliders de volume de eventos e gravações", "Seleção de add-ons opcionais"],
+            "outputs": [
+                "Custo total mensal em dólares",
+                "Detalhamento por produto e tier de volume",
+                "Indicação do limite gratuito por produto"
+            ],
+            "expected_outcome": "Transparência radical de preços com cálculo determinístico em tempo real.",
+            "gaps": ["Cálculos de preço usam `pricingSliderLogic` sincronizado com dados GraphQL."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-058-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-058-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-058-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-058-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-058-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-059",
+            "route": "/docs",
+            "title": "Hub Central de Documentação Técnica",
+            "wave": "W8-GOVERNANCE-COMMUNITY",
+            "surface": "Documentation",
+            "app_template": "<Reader />",
+            "primary_actor": "demo-product-engineer",
+            "supporting_actors": ["anonymous-visitor", "demo-data-engineer"],
+            "jtbd": "WHEN busco guias de implementação técnica e referências de API I WANT TO navegar pela documentação estruturada com busca instantânea, navegação de 3 colunas e exemplos de código SO I CAN resolver dúvidas de integração rapidamente WITHOUT bloqueios no desenvolvimento.",
+            "inputs": ["Busca por palavra-chave ou navegação pela árvore lateral", "Seleção de artigo técnico"],
+            "outputs": [
+                "Artigo técnico formatado em Markdown com syntax highlighting",
+                "Índice de seções da página na coluna direita"
+            ],
+            "expected_outcome": "Experiência de leitura densa, rápida e altamente informativa.",
+            "gaps": ["Navegação de 3 colunas gerenciada por `<ReaderView />`."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-059-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-059-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-059-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-059-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-059-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-060",
+            "route": "/handbook",
+            "title": "Handbook da Empresa e Cultura Open Core",
+            "wave": "W8-GOVERNANCE-COMMUNITY",
+            "surface": "Handbook",
+            "app_template": "<Reader />",
+            "primary_actor": "anonymous-visitor",
+            "supporting_actors": ["demo-community-contributor", "demo-executive-sponsor"],
+            "jtbd": "WHEN quero entender como a PostHog opera internamente I WANT TO ler o handbook público que documenta estratégia, engenharia, cultura e compensação SO I CAN compreender a visão transparente de negócio WITHOUT segredos corporativos.",
+            "inputs": ["Navegação pelos capítulos do Handbook", "Consulta de páginas de arquitetura técnica"],
+            "outputs": ["Documentação organizacional aberta e auditável"],
+            "expected_outcome": "Transparência radical sobre processos e padrões técnicos da organização.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-060-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-060-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-060-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-060-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-060-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-061",
+            "route": "/community",
+            "title": "Portal da Comunidade PostHog",
+            "wave": "W8-GOVERNANCE-COMMUNITY",
+            "surface": "Community",
+            "app_template": "<Explorer />",
+            "primary_actor": "demo-community-contributor",
+            "supporting_actors": ["anonymous-visitor", "demo-product-engineer"],
+            "jtbd": "WHEN quero interagir com outros usuários e engenheiros do PostHog I WANT TO acessar o hub da comunidade com perguntas em destaque, perfis de colaboradores e discussões ativas SO I CAN compartilhar conhecimento e aprender com o ecossistema WITHOUT isolamento.",
+            "inputs": ["Filtro de tópicos de discussão", "Busca de membros e soluções aceitas"],
+            "outputs": ["Feed da comunidade atualizado com contagem de votos e respostas", "Badges de colaboradores"],
+            "expected_outcome": "Engajamento colaborativo com a comunidade global de engenheiros de produto.",
+            "gaps": ["Nenhum gap crítico identificado."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-061-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-061-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-061-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-061-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-061-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-062",
+            "route": "/questions",
+            "title": "Fórum de Perguntas e Respostas Técnicas",
+            "wave": "W8-GOVERNANCE-COMMUNITY",
+            "surface": "Community & Support",
+            "app_template": "<Inbox />",
+            "primary_actor": "demo-community-contributor",
+            "supporting_actors": ["demo-product-engineer", "demo-support-specialist"],
+            "jtbd": "WHEN encontro uma dúvida de implementação I WANT TO navegar pelas perguntas em um layout estilo Outlook com lista e painel de leitura SO I CAN encontrar respostas validadas ou publicar minha própria pergunta com código SO I CAN desbloquear meu trabalho WITHOUT esperar dias por suporte.",
+            "inputs": [
+                "Navegação pela lista de threads à esquerda",
+                "Leitura do conteúdo e respostas no painel direito"
+            ],
+            "outputs": ["Interface dividida em painéis (lista e detalhe)", "Respostas marcadas com 'Solução Oficial'"],
+            "expected_outcome": "Resolução rápida de problemas técnicos através do acervo comunitário.",
+            "gaps": ["Layout estilo Outlook construído sobre `<Inbox />`."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-062-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-062-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-062-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-062-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-062-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-063",
+            "route": "/customers",
+            "title": "Estudos de Caso e Histórias de Clientes",
+            "wave": "W8-GOVERNANCE-COMMUNITY",
+            "surface": "Customers & Social Proof",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-executive-sponsor",
+            "supporting_actors": ["anonymous-visitor", "demo-growth-lead"],
+            "jtbd": "WHEN avalio o sucesso do PostHog em empresas de tecnologia I WANT TO ler histórias detalhadas de migração (ex: Y Combinator, Airbus, Phantom) no formato de documento limpo SO I CAN comprovar a confiabilidade técnica da plataforma para a diretoria WITHOUT apresentações de vendas exageradas.",
+            "inputs": ["Seleção de estudo de caso", "Filtro por tamanho de empresa ou produto"],
+            "outputs": ["Artigo em formato Google Docs com dados reais de métricas e depoimentos de engenheiros"],
+            "expected_outcome": "Comprovação de autoridade técnica e sucesso em escala.",
+            "gaps": ["Páginas usam `<Editor />` com `<MDXEditor />` interno."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-063-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-063-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-063-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-063-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-063-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-064",
+            "route": "/dpa",
+            "title": "Termos de Processamento de Dados (DPA) e Conformidade",
+            "wave": "W8-GOVERNANCE-COMMUNITY",
+            "surface": "Legal & Compliance",
+            "app_template": "<Editor />",
+            "primary_actor": "demo-security-reviewer",
+            "supporting_actors": ["demo-platform-admin"],
+            "jtbd": "WHEN valido os requisitos de privacidade e proteção de dados da minha empresa I WANT TO revisar o Adendo de Processamento de Dados (DPA), cláusulas padrão da UE e lista de subprocessadores auditados SO I CAN assinar a conformidade jurídica com GDPR e LGPD WITHOUT atritos regulatórios.",
+            "inputs": ["Leitura das cláusulas contratuais", "Consulta da lista de subprocessadores (/subprocessors)"],
+            "outputs": ["Documento legal completo formatado em Markdown denso", "Instruções de assinatura digital"],
+            "expected_outcome": "Conformidade jurídica comprovada para empresas globais.",
+            "gaps": ["Página densa em texto com renderização de contratos."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-064-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-064-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-064-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-064-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-064-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "PV-065",
+            "route": "/talk-to-a-human",
+            "title": "Canal Direto com Especialistas (Talk to a Human)",
+            "wave": "W8-GOVERNANCE-COMMUNITY",
+            "surface": "Support & Sales",
+            "app_template": "Modal",
+            "primary_actor": "demo-executive-sponsor",
+            "supporting_actors": ["demo-platform-admin", "anonymous-visitor"],
+            "jtbd": "WHEN preciso de atendimento humano especializado para migração ou negociação corporativa I WANT TO preencher um formulário simples e direto no modal 'Talk to a Human' SO I CAN agendar uma conversa com um engenheiro do time da PostHog WITHOUT passar por bots lentos ou formulários burocráticos.",
+            "inputs": ["E-mail corporativo", "Estimativa de volume de eventos", "Mensagem opcional de contexto"],
+            "outputs": ["Formulário modal focado", "Confirmação de recebimento com tempo médio de resposta"],
+            "expected_outcome": "Contato estabelecido de forma ágil e humanizada.",
+            "gaps": ["Modal atua como exceção 'app-less' documentada em `agents/apps.md`."],
+            "expected_screenshots": {
+                "light_wide": "reports/evidence/journeys/screenshots/pv-065-light-1440.png",
+                "light_narrow": "reports/evidence/journeys/screenshots/pv-065-light-640.png",
+                "dark_wide": "reports/evidence/journeys/screenshots/pv-065-dark-1440.png",
+                "dark_narrow": "reports/evidence/journeys/screenshots/pv-065-dark-640.png"
+            },
+            "expected_motion": "reports/evidence/journeys/videos/pv-065-motion.gif",
+            "execution_status": "NOT_EXECUTED"
+        }
+    ]
+}

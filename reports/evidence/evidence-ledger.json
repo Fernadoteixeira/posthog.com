@@ -1,0 +1,42 @@
+{
+    "schema_version": "evidence-ledger-v1",
+    "project": "posthog.com",
+    "authoritative": true,
+    "purpose": "Evidence Ledger para registro criptográfico e auditável de jornadas demo e validações do PostHog.",
+    "ledger_policy": {
+        "immutability": "append_only",
+        "hash_algorithm": "SHA-256",
+        "timestamp_format": "ISO-8601 UTC"
+    },
+    "claims": [
+        {
+            "claim_id": "CLM-001-FRAMEWORK-INIT",
+            "timestamp_utc": "2026-08-27T23:45:00Z",
+            "claim_type": "STRUCTURAL_VALIDATION",
+            "status": "PASS",
+            "command": "node scripts/validate-demo-journeys.js",
+            "exit_code": 0,
+            "summary": "Validação canônica de 15 atores, 65 page views, contratos de captura e integridade referencial.",
+            "artifacts": [
+                "templates/demo-users-actors-v1.json",
+                "templates/demo-page-view-journeys-v1.json",
+                "templates/demo-journey-capture-contract-v1.json",
+                "references/demo-users-actors-v1.md",
+                "references/demo-page-view-journeys-v1.md",
+                "references/demo-journeys-dor-dod-v1.md",
+                "references/demo-page-view-coverage-static.mmd"
+            ],
+            "metrics": {
+                "actors_count": 15,
+                "page_views_count": 65,
+                "waves_count": 9,
+                "errors_count": 0,
+                "warnings_count": 0
+            }
+        }
+    ],
+    "metadata": {
+        "total_claims": 1,
+        "last_updated_utc": "2026-08-27T23:45:00Z"
+    }
+}

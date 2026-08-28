@@ -1,0 +1,469 @@
+{
+    "schema_version": "demo-users-actors-v1",
+    "project": "posthog.com",
+    "authoritative": false,
+    "purpose": "Catálogo estático de personas humanas e atores técnicos para jornadas de demonstração Canonical 360° no PostHog, sem credenciais, tokens ou dados sensíveis.",
+    "security_policy": {
+        "credentials_in_fixture": false,
+        "tokens_in_fixture": false,
+        "private_keys_in_fixture": false,
+        "runtime_creation_allowed": false,
+        "fixture_namespace_prefix": "demo-ph-",
+        "identifiers_are_neutral": true,
+        "redaction_rules": [
+            "Substituir tokens de API de projeto por [REDACTED_PROJECT_API_KEY]",
+            "Substituir chaves de escrita e ingestão por [REDACTED_WRITE_KEY]",
+            "Substituir senhas e cookies de sessão por [REDACTED_SESSION_SECRET]",
+            "Substituir strings de conexão de Data Warehouse por [REDACTED_CONNECTION_URI]"
+        ]
+    },
+    "actors": [
+        {
+            "id": "anonymous-visitor",
+            "kind": "human",
+            "display_name": "Visitante Anônimo / Explorador",
+            "role": "Não Autenticado",
+            "scope": "Landing pages públicas, documentação, handbook, calculadora de preços e fluxos de introdução",
+            "jtbd": "Entender o posicionamento do PostHog, comparar produtos e capacidades, consultar precificação e iniciar jornada de onboarding sem fricção.",
+            "allowed_actions": [
+                "Navegar pelo desktop OS público",
+                "Abrir e redimensionar janelas públicas (<Reader />, <Editor />, <Presentation />, <MediaPlayer />)",
+                "Consultar calculadora de preços (/pricing)",
+                "Consultar documentação técnica (/docs)",
+                "Consultar handbook da empresa (/handbook)",
+                "Iniciar fluxo de cadastro ou demonstração"
+            ],
+            "forbidden_actions": [
+                "Acessar dados privados de projetos ou organizações",
+                "Executar consultas SQL em bancos de dados de produção",
+                "Modificar configurações de faturamento ou permissões",
+                "Capturar credenciais em telas públicas"
+            ],
+            "required_inputs": [
+                "Navegador moderno com suporte a CSS container queries",
+                "Preferência de tema (light ou dark)",
+                "Viewport responsivo (narrow 640px ou wide 1440px)"
+            ],
+            "expected_outputs": [
+                "Interface de desktop OS hidratada e responsiva",
+                "Janelas redimensionáveis posicionadas",
+                "Conteúdo em Simplified Technical English",
+                "Estimativa de faturamento dinâmica na calculadora"
+            ]
+        },
+        {
+            "id": "demo-product-engineer",
+            "kind": "human",
+            "display_name": "Engenheiro de Produto / Full-stack",
+            "role": "Desenvolvedor de Aplicação",
+            "scope": "Product Analytics, Feature Flags, Error Tracking, Session Replay e instrumentação de SDKs",
+            "jtbd": "Instrumentar eventos customizados no código, configurar feature flags para lançamentos graduais, diagnosticar exceções e validar experiência do usuário via Session Replay sem depender de múltiplos softwares.",
+            "allowed_actions": [
+                "Criar e editar Feature Flags com regras de rollout",
+                "Analisar funis de conversão e gráficos de retenção",
+                "Inspecionar exceções no Error Tracking com stacktraces e source maps",
+                "Visualizar gravações de sessão associadas a erros",
+                "Consultar documentação de SDKs e gerar snippets de código"
+            ],
+            "forbidden_actions": [
+                "Acessar gravações de sessão com dados PII não mascarados",
+                "Excluir projetos ou alterar faturamento da organização",
+                "Expor tokens de escrita de produção em ambiente de teste"
+            ],
+            "required_inputs": [
+                "Nome da feature flag ou evento customizado",
+                "Critérios de segmentação de usuários",
+                "Ambiente alvo (development, staging ou production)"
+            ],
+            "expected_outputs": [
+                "Feature Flag ativa com chaves de variação",
+                "Insight analítico renderizado com visualização gráfica",
+                "Sessão de erro correlacionada com trace e replay",
+                "Snippet de código pronto para cópia"
+            ]
+        },
+        {
+            "id": "demo-growth-lead",
+            "kind": "human",
+            "display_name": "Líder de Growth / Product Manager",
+            "role": "Analista de Produto & Negócios",
+            "scope": "Funnels, Retention, Trends, Experiments (A/B Testing), Web Analytics e Surveys",
+            "jtbd": "Compreender o comportamento dos cohorts de usuários, projetar testes A/B estatisticamente confiáveis, identificar gargalos de ativação e coletar feedback qualitativo por pesquisas sem necessidade de engenharia contínua.",
+            "allowed_actions": [
+                "Criar e gerenciar Experimentos A/B com cálculo de significância Bayesiana",
+                "Configurar pesquisas na aplicação (NPS, CSAT, feedback aberto)",
+                "Criar dashboards customizados e compartilhar relatórios",
+                "Analisar métricas de Web Analytics (pageviews, bounce rate, referrers)",
+                "Definir cohorts de usuários baseados em propriedades de eventos"
+            ],
+            "forbidden_actions": [
+                "Modificar código fonte ou pipelines de infraestrutura",
+                "Acessar chaves de API secretas ou certificados",
+                "Excluir eventos brutos do banco de dados"
+            ],
+            "required_inputs": [
+                "Hipótese do experimento e métrica primária de sucesso",
+                "Definição do público-alvo ou filtro de cohort",
+                "Janela temporal de análise"
+            ],
+            "expected_outputs": [
+                "Gráficos de funil com taxas de conversão por etapa",
+                "Relatório de experimento com intervalo de confiança",
+                "Pesquisa publicada e pronta para acionamento na UI",
+                "Dashboard executivo com KPIs atualizados"
+            ]
+        },
+        {
+            "id": "demo-data-engineer",
+            "kind": "human",
+            "display_name": "Engenheiro de Dados / Analytics Engineer",
+            "role": "Arquiteto de Dados",
+            "scope": "Data Warehouse, CDP (Pipelines), SQL Explorer (HogQL), Batch Exports e Transformações",
+            "jtbd": "Conectar e consultar tabelas externas no Data Warehouse, escrever queries SQL analíticas com HogQL, orquestrar pipelines de dados em tempo real e garantir integridade de schemas sem complexidade de ETL externo.",
+            "allowed_actions": [
+                "Configurar fontes de dados externas (S3, Stripe, PostgreSQL, BigQuery)",
+                "Executar consultas SQL complexas usando HogQL",
+                "Modelar tabelas virtuais e definir visões semânticas",
+                "Configurar Batch Exports para storage externo com compressão Parquet",
+                "Depurar schemas de eventos e gerenciar transformações CDP"
+            ],
+            "forbidden_actions": [
+                "Persistir credenciais de banco de dados em texto simples",
+                "Executar comandos DDL destrutivos sem aprovação",
+                "Ignorar políticas de retenção de dados configuradas"
+            ],
+            "required_inputs": [
+                "URI de conexão de banco ou bucket S3 (sanitizado)",
+                "Query HogQL / SQL estruturada",
+                "Filtros de partição e agendamento de sincronização"
+            ],
+            "expected_outputs": [
+                "Tabela externa mapeada e consultável em tempo real",
+                "Resultado tabular da query com metadados de execução",
+                "Pipeline de exportação com status de sincronização e métricas de bytes"
+            ]
+        },
+        {
+            "id": "demo-platform-admin",
+            "kind": "human",
+            "display_name": "Administrador de Organização / SRE",
+            "role": "Administrador de Plataforma",
+            "scope": "Configurações de Organização, Membros, RBAC, SSO/SAML, Faturamento e Ingestão",
+            "jtbd": "Gerenciar membros da organização com papéis estritos, controlar limites de faturamento e alertas de consumo, configurar provedor de identidade corporativa e garantir governança geral do PostHog.",
+            "allowed_actions": [
+                "Convidar membros e atribuir permissões (Admin, Member, Read-Only)",
+                "Configurar autenticação SAML/SSO e impor 2FA",
+                "Definir limites de gastos mensais e alertas por produto",
+                "Gerenciar chaves de API pessoais e de projeto",
+                "Revisar trilhas de auditoria administrativa"
+            ],
+            "forbidden_actions": [
+                "Compartilhar credenciais mestras de administrador",
+                "Desabilitar logs de auditoria mandatados por compliance",
+                "Elevar privilégios de usuários sem aprovação"
+            ],
+            "required_inputs": [
+                "E-mail institucional do membro a convidar",
+                "Papel e permissões associadas",
+                "Regras de orçamento e limites de ingestão"
+            ],
+            "expected_outputs": [
+                "Convite enviado com link de ativação seguro",
+                "Política de SSO ativada e validada",
+                "Previsão de fatura e limites de gastos atualizados",
+                "Log de auditoria registrado com timestamp UTC"
+            ]
+        },
+        {
+            "id": "demo-security-reviewer",
+            "kind": "human",
+            "display_name": "Auditor de Segurança / Compliance Officer",
+            "role": "Auditor de Conformidade & Privacidade",
+            "scope": "Logs de Auditoria, DPA, GDPR/LGPD, Mascaramento de Session Replay e Políticas de Retenção",
+            "jtbd": "Verificar se dados pessoais sensíveis (PII) estão mascarados no Session Replay, auditar histórico de acessos a dados de clientes, validar termos de proteção de dados (DPA) e garantir retenção segura.",
+            "allowed_actions": [
+                "Consultar relatórios de conformidade e subprocessadores (/subprocessors)",
+                "Inspecionar regras de mascaramento de texto/input no Session Replay",
+                "Revisar trilhas de auditoria imutáveis com timestamps UTC",
+                "Executar e verificar requisições de exclusão de dados (GDPR/LGPD)",
+                "Assinar e exportar adendos de processamento de dados (DPA)"
+            ],
+            "forbidden_actions": [
+                "Desmascarar inputs de cartão de crédito ou senhas",
+                "Alterar ou deletar logs de auditoria históricos",
+                "Exportar dados não sanitizados fora do escopo aprovado"
+            ],
+            "required_inputs": [
+                "Identificador de usuário para exclusão/exportação",
+                "Intervalo de auditoria com filtro de ação",
+                "Regras de conformidade regulatória aplicáveis"
+            ],
+            "expected_outputs": [
+                "Relatório de auditoria sanitizado com SHA-256",
+                "Confirmação de exclusão criptográfica de dados do titular",
+                "Status de conformidade do DPA validado"
+            ]
+        },
+        {
+            "id": "demo-ai-engineer",
+            "kind": "human",
+            "display_name": "Engenheiro de IA / LLM Developer",
+            "role": "Desenvolvedor de Sistemas de IA",
+            "scope": "AI Observability, LLM Analytics, Traces, Prompt Management, Avaliações e Model Context Protocol",
+            "jtbd": "Monitorar chamadas a modelos de linguagem (OpenAI, Anthropic, Gemini), rastrear latência, contagem de tokens e custos por modelo, gerenciar versões de prompts e depurar traces com PostHog AI e MCP.",
+            "allowed_actions": [
+                "Visualizar traces e spans de chamadas LLM em cascata",
+                "Analisar custos acumulados de tokens por provedor e usuário",
+                "Gerenciar e versionar templates de prompt no Prompt Management",
+                "Conectar agentes autônomos ao PostHog MCP para consultas em linguagem natural",
+                "Configurar avaliações automáticas de qualidade de respostas de IA"
+            ],
+            "forbidden_actions": [
+                "Expor chaves de API privadas de provedores LLM no cliente",
+                "Armazenar prompts com PII sem consentimento",
+                "Permitir execução irrestrita de ferramentas MCP sem confirmação"
+            ],
+            "required_inputs": [
+                "Identificador do trace ou sessão de inferência",
+                "Template de prompt e variáveis de contexto",
+                "Critérios de avaliação de métricas de qualidade de IA"
+            ],
+            "expected_outputs": [
+                "Árvore de spans de trace com latência e tokens detalhados",
+                "Dashboard de custos de IA por modelo e aplicação",
+                "Versão do prompt publicada e pronta para invocação no SDK"
+            ]
+        },
+        {
+            "id": "demo-support-specialist",
+            "kind": "human",
+            "display_name": "Especialista de Suporte / Customer Success",
+            "role": "Operador de Atendimento",
+            "scope": "Session Replay, Customer 360, Error Logs, Surveys Feedback e Discussions",
+            "jtbd": "Reproduzir com exatidão bugs relatados por clientes assistindo aos replays de sessão onde ocorreram erros, inspecionando o console do navegador e verificando feedback de pesquisas para resolver tickets rapidamente.",
+            "allowed_actions": [
+                "Buscar gravações de sessão pelo e-mail ou ID anônimo do usuário",
+                "Assistir replays de sessão com controle de velocidade e saltos de inatividade",
+                "Inspecionar eventos de clique, navegação e mensagens de console",
+                "Consultar histórico de respostas de pesquisas enviadas pelo cliente",
+                "Compartilhar link seguro de replay com timestamp com o time de engenharia"
+            ],
+            "forbidden_actions": [
+                "Visualizar dados desmascarados restritos",
+                "Alterar código ou configurações de projetos do cliente",
+                "Baixar gravações de vídeo brutas em dispositivos não autorizados"
+            ],
+            "required_inputs": [
+                "E-mail do cliente ou ID da sessão",
+                "Horário aproximado do incidente reportado",
+                "Filtro por evento de erro ou exceção"
+            ],
+            "expected_outputs": [
+                "Gravação de sessão carregada no player com timeline de eventos",
+                "Lista de erros de JavaScript e chamadas de rede falhadas",
+                "Link de compartilhamento interno com contexto preservado"
+            ]
+        },
+        {
+            "id": "demo-executive-sponsor",
+            "kind": "human",
+            "display_name": "Executivo / Founder / VP de Engenharia",
+            "role": "Tomador de Decisão Executiva",
+            "scope": "Dashboards Executivos, Análise de ROI, Previsão de Custos, Roadmap e Casos de Clientes",
+            "jtbd": "Acompanhar métricas de negócio de alto nível (ARR, conversão, retenção geral), prever custos de infraestrutura do PostHog e validar retorno sobre investimento em relação a ferramentas legadas de analytics.",
+            "allowed_actions": [
+                "Visualizar dashboards consolidados de produto e negócios",
+                "Consultar simulador de custos e projeção de faturamento",
+                "Revisar cases de clientes e benchmarks de migração (/customers)",
+                "Consultar roadmap público e novidades no Changelog (/changelog)"
+            ],
+            "forbidden_actions": [
+                "Editar queries analíticas técnicas sem conhecimento de schema",
+                "Alterar configurações de instrumentação ou código de produção"
+            ],
+            "required_inputs": [
+                "Filtro temporal mensal/trimestral",
+                "Volume projetado de eventos e gravações",
+                "Métricas-chave de interesse corporativo"
+            ],
+            "expected_outputs": [
+                "Visão unificada de métricas executivas em painel responsivo",
+                "Gráfico comparativo de custos com clareza de economia de escala",
+                "Relatório exportável para stakeholders"
+            ]
+        },
+        {
+            "id": "demo-community-contributor",
+            "kind": "human",
+            "display_name": "Colaborador da Comunidade / Open Source",
+            "role": "Desenvolvedor Externo & Comunidade",
+            "scope": "Fórum da Comunidade (/community), Perguntas (/questions), Tutoriais, Repositório GitHub",
+            "jtbd": "Fazer perguntas técnicas sobre implementações de analytics, compartilhar tutoriais de melhores práticas, contribuir com correções em documentações abertas e interagir com o time da PostHog.",
+            "allowed_actions": [
+                "Criar e responder threads de discussão em /questions",
+                "Votar e comentar em posts da comunidade",
+                "Consultar tutoriais técnicos e guias passo a passo",
+                "Acessar repositório público do GitHub e reportar issues",
+                "Explorar vitrine de projetos paralelos (/side-projects)"
+            ],
+            "forbidden_actions": [
+                "Postar spam ou conteúdo não relacionado à comunidade",
+                "Tentar obter acesso a dados internos ou de outros usuários",
+                "Executar scrapers agressivos contra o site"
+            ],
+            "required_inputs": [
+                "Perfil público autenticado na comunidade",
+                "Dúvida técnica ou tutorial estruturado",
+                "Tags de tópicos relevantes"
+            ],
+            "expected_outputs": [
+                "Thread de discussão publicada e indexada para busca",
+                "Notificações de respostas e soluções aceitas",
+                "Contribuição reconhecida no perfil da comunidade"
+            ]
+        },
+        {
+            "id": "demo-client-sdk",
+            "kind": "service",
+            "display_name": "SDK Cliente PostHog (JS / React / Mobile)",
+            "role": "Agente de Telemetria e Ingestão",
+            "scope": "API de Ingestão de Eventos (/e/), Gravação de Sessão (/s/) e Avaliação de Flags (/decide/)",
+            "jtbd": "Capturar eventos de interação do usuário, gravar mutações do DOM para Session Replay e consultar flags de recursos em tempo real com baixa latência e alta tolerância a falhas offline.",
+            "allowed_actions": [
+                "Enviar batches de eventos compactados via POST com gzip",
+                "Enviar snapshots de gravação de tela com compressão",
+                "Consultar variantes de Feature Flags ativas para o usuário identificado",
+                "Persistir eventos em IndexedDB/LocalStorage durante instabilidade de rede"
+            ],
+            "forbidden_actions": [
+                "Enviar dados de cartões ou senhas em texto puro",
+                "Bloquear a renderização da thread principal do navegador",
+                "Realizar chamadas síncronas bloqueantes"
+            ],
+            "required_inputs": [
+                "Chave pública de API do projeto (Project API Key)",
+                "Endpoint de ingestão autorizado (US ou EU Cloud / Reverse Proxy)",
+                "Identificador anônimo ou identificado (Distinct ID)"
+            ],
+            "expected_outputs": [
+                "Código HTTP 200 OK com confirmação de recebimento",
+                "Payload JSON de Feature Flags ativas e avaliadas",
+                "Eventos enfileirados e processados no buffer de ingestão"
+            ]
+        },
+        {
+            "id": "demo-cdp-webhook-sink",
+            "kind": "service",
+            "display_name": "Receptor de Destinos CDP / Webhooks",
+            "role": "Sistema Externo Integrado",
+            "scope": "Endpoints de Destinos em Tempo Real (Slack, HubSpot, Webhooks Customizados)",
+            "jtbd": "Receber payloads de eventos do PostHog em tempo real via HTTP POST assinado, processar dados no sistema downstream e responder com status de entrega auditável.",
+            "allowed_actions": [
+                "Receber notificações de eventos filtrados por regras do CDP",
+                "Validar assinaturas criptográficas HMAC enviadas nos cabeçalhos",
+                "Retornar códigos de resposta HTTP 2xx e registrar latência de entrega"
+            ],
+            "forbidden_actions": [
+                "Armazenar segredos de webhook em logs públicos",
+                "Aceitar payloads com assinaturas inválidas ou expiradas",
+                "Reter dados além da política estabelecida no contrato"
+            ],
+            "required_inputs": [
+                "URL de webhook HTTPS isolada e protegida por TLS",
+                "Segredo compartilhado para assinatura HMAC (fora do Git)",
+                "Payload estruturado de evento PostHog"
+            ],
+            "expected_outputs": [
+                "Resposta HTTP 200/202 com timestamp de recebimento",
+                "Métricas de entrega (sucesso, retry, falha) registradas no painel CDP"
+            ]
+        },
+        {
+            "id": "demo-hog-function-runtime",
+            "kind": "service",
+            "display_name": "Motor de Execução de Hog Functions (Hog VM)",
+            "role": "Executor de Transformações e Lógica de Eventos",
+            "scope": "Ambiente de Execução Seguro de Funções Hog em Tempo Real",
+            "jtbd": "Executar transformações de dados em milissegundos sobre eventos ingeridos, filtrar propriedades, enriquecer dados com chamadas seguras e acionar destinos sem expor infraestrutura subjacente.",
+            "allowed_actions": [
+                "Interpretar e executar bytecode de Hog com isolamento e timeout estrito",
+                "Acessar propriedades de eventos e variáveis seguras injetadas",
+                "Emitir logs estruturados de execução para a aba de depuração no CDP",
+                "Encaminhar eventos transformados para a próxima etapa da esteira"
+            ],
+            "forbidden_actions": [
+                "Acessar filesystem do host ou variáveis de ambiente de produção",
+                "Executar loops infinitos ou exceder limites de CPU/memória alocados",
+                "Realizar chamadas de rede para endereços IP privados/loopback"
+            ],
+            "required_inputs": [
+                "Código ou bytecode da função Hog validado",
+                "Objeto de evento de entrada com metadados",
+                "Limite de tempo de execução (budget de milissegundos)"
+            ],
+            "expected_outputs": [
+                "Evento transformado ou cancelado conforme a lógica",
+                "Logs de execução redigidos e disponíveis na interface",
+                "Métricas de tempo de execução e taxa de erro da função"
+            ]
+        },
+        {
+            "id": "demo-data-warehouse-connector",
+            "kind": "service",
+            "display_name": "Conector de Sincronização de Data Warehouse",
+            "role": "Agente de Sincronização em Lote",
+            "scope": "Sincronização de Tabelas Externas e Exportação em Batch",
+            "jtbd": "Extrair incrementalmente schemas e registros de bancos de dados externos (Postgres, Snowflake, S3, Stripe), convertê-los para o formato otimizado e disponibilizá-los para consultas SQL unificadas.",
+            "allowed_actions": [
+                "Ler metadados de schema e tipos de coluna da fonte externa",
+                "Executar extrações incrementais baseadas em timestamp ou cursor",
+                "Gravar dados particionados no armazenamento do Data Warehouse",
+                "Registrar histórico de execuções com contagem de linhas e bytes transferidos"
+            ],
+            "forbidden_actions": [
+                "Escrever ou deletar dados na fonte de dados de origem",
+                "Armazenar tokens ou credenciais de banco no repositório",
+                "Executar sincronizações fora da janela agendada"
+            ],
+            "required_inputs": [
+                "Configuração da conexão autenticada e criptografada",
+                "Filtros de seleção de tabelas e colunas",
+                "Frequência de sincronização (horária, diária, manual)"
+            ],
+            "expected_outputs": [
+                "Tabela sincronizada pronta para consultas no HogQL Explorer",
+                "Relatório de sincronização com linhas inseridas e duração total",
+                "Alerta em caso de falha de conexão ou schema incompatível"
+            ]
+        },
+        {
+            "id": "demo-mcp-agent",
+            "kind": "service",
+            "display_name": "Agente PostHog AI & Model Context Protocol (MCP)",
+            "role": "Assistente Autônomo de Inteligência Analítica",
+            "scope": "Servidor PostHog MCP (/docs/cdp/surfaces/mcp) e Assistente PostHog AI",
+            "jtbd": "Permitir que agentes de IA e IDEs consultem dados de produto, criem insights analíticos, gerem queries HogQL e explorem documentações em linguagem natural através do padrão Model Context Protocol.",
+            "allowed_actions": [
+                "Expor ferramentas MCP para consulta de insights, funis, flags e docs",
+                "Traduzir perguntas em linguagem natural para consultas HogQL válidas",
+                "Executar ferramentas de leitura mediante escopo restrito de API",
+                "Solicitar confirmação humana explícita (HITL) para ações de mutação"
+            ],
+            "forbidden_actions": [
+                "Executar mutações destrutivas sem aprovação humana",
+                "Exfiltrar chaves de projeto ou dados confidenciais de usuários",
+                "Fornecer dados não autorizados pelo token de autenticação do MCP"
+            ],
+            "required_inputs": [
+                "Prompt ou comando em linguagem natural do usuário/agente",
+                "Token de autenticação pessoal ou de serviço com escopo específico",
+                "Contexto do projeto ativo"
+            ],
+            "expected_outputs": [
+                "Resposta estruturada com dados analíticos sintetizados",
+                "Query HogQL formatada e explicada",
+                "Chamada de ferramenta MCP com parâmetros validados"
+            ]
+        }
+    ]
+}

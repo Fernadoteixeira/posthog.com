@@ -44,3 +44,6 @@ __pycache__
 /.claude/worktrees/
 /.claude/settings.local.json
 .env*
+
+# Journey evidence captures (screenshots and videos)
+/reports/evidence/journeys/

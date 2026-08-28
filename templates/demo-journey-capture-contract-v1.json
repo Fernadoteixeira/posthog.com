@@ -1,0 +1,106 @@
+{
+    "schema_version": "demo-journey-capture-contract-v1",
+    "project": "posthog.com",
+    "authoritative": false,
+    "purpose": "Contrato operacional e criptográfico para captura de screenshots 4-state e vídeos/GIFs de movimento das jornadas demo do PostHog sem violação de segredos nem dados pessoais.",
+    "scope": {
+        "journey_catalog": "templates/demo-page-view-journeys-v1.json",
+        "required_page_views": 65,
+        "journey_waves": [
+            "W0-DESKTOP-SHELL",
+            "W1-PRODUCT-ANALYTICS",
+            "W2-SESSION-REPLAY",
+            "W3-FLAGS-EXPERIMENTS",
+            "W4-CDP-PIPELINES",
+            "W5-DATA-WAREHOUSE",
+            "W6-AI-ERROR-TRACKING",
+            "W7-SURVEYS-GROWTH",
+            "W8-GOVERNANCE-COMMUNITY"
+        ]
+    },
+    "visual_specifications": {
+        "viewports": {
+            "narrow": {
+                "width": 640,
+                "height": 860,
+                "device_scale_factor": 1,
+                "notes": "Representa janelas estreitas e visualização móvel em container query @2xl"
+            },
+            "wide": {
+                "width": 1440,
+                "height": 900,
+                "device_scale_factor": 1,
+                "notes": "Representa o desktop expandido com múltiplos painéis e visualização completa"
+            }
+        },
+        "color_modes": [
+            {
+                "mode": "light",
+                "storage_seed": {
+                    "theme": "light",
+                    "siteSettings": "{\"colorMode\":\"light\",\"theme\":\"light\"}"
+                }
+            },
+            {
+                "mode": "dark",
+                "storage_seed": {
+                    "theme": "dark",
+                    "siteSettings": "{\"colorMode\":\"dark\",\"theme\":\"dark\"}"
+                }
+            }
+        ],
+        "four_state_grid_matrix": ["light-wide", "light-narrow", "dark-wide", "dark-narrow"],
+        "motion_capture_rules": {
+            "formats": ["gif", "webp", "mp4"],
+            "frame_rate_fps": 12,
+            "max_duration_seconds": 5,
+            "max_file_size_bytes": 10485760,
+            "scale_max_width": 800,
+            "ffmpeg_palette_command": "ffmpeg -i recording.mov -vf \"fps=12,scale=800:-1:flags=lanczos,split[a][b];[a]palettegen[p];[b][p]paletteuse\" -loop 0 motion.gif",
+            "motion_triggers": [
+                "Transições de janelas e arrasto no Desktop OS",
+                "Abertura e hover de submenus no TaskBarMenu",
+                "Navegação de slides em carrosséis de produtos (<Presentation />, ReaderViewProduct)",
+                "Alternância de abas em OSTabs e expansão de acordions",
+                "Interações de zoom, pan e timeline no player de Session Replay"
+            ]
+        }
+    },
+    "automation_driver_rules": {
+        "engine": "puppeteer-core",
+        "navigation": {
+            "wait_until": "domcontentloaded",
+            "forbidden_wait_until": "networkidle2",
+            "hydration_sleep_ms": 9000,
+            "fresh_page_per_capture": true
+        },
+        "dialog_handling": "auto_accept_beforeunload",
+        "cookie_banner": "dismiss_before_capture",
+        "nested_menus": "extension_hover_for_deep_submenus"
+    },
+    "sanitization_and_privacy": {
+        "prohibited_in_visuals": [
+            "Tokens de API pessoais (phx_...)",
+            "Tokens de API de projeto reais (phc_...)",
+            "Senhas e cookies de autenticação",
+            "Chaves privadas de IA (OpenAI, Anthropic, Gemini)",
+            "Nomes, e-mails ou dados de identificação pessoal (PII) de clientes reais"
+        ],
+        "fixture_data_standard": "Todas as capturas devem exibir estritamente dados sintéticos com namespace demo-ph-."
+    },
+    "evidence_ledger_integration": {
+        "hashing_algorithm": "SHA-256",
+        "timestamp_standard": "ISO-8601 UTC (ex: 2026-08-27T23:30:00Z)",
+        "storage_directory": "reports/evidence/journeys/",
+        "naming_convention": {
+            "screenshot": "reports/evidence/journeys/screenshots/pv-{id}-{mode}-{width}.png",
+            "motion": "reports/evidence/journeys/videos/pv-{id}-motion.gif"
+        }
+    },
+    "current_state": {
+        "runtime": "NOT_EXECUTED",
+        "screenshots_captured": 0,
+        "videos_captured": 0,
+        "reason": "O ambiente local aguarda ativação do dev server ('pnpm start') e execução automatizada da esteira de captura de evidências visuais."
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "schema_version": "evidence-ledger-v1",
+    "project": "posthog.com",
+    "authoritative": false,
+    "purpose": "Ledger append-only e auditável para registro criptográfico de evidências de execução das jornadas demo do PostHog.",
+    "ledger_policy": {
+        "immutability": "append_only",
+        "hash_algorithm": "SHA-256",
+        "timestamp_format": "ISO-8601 UTC",
+        "forbidden_promotions": [
+            "NOT_EXECUTED to PASS without verified hash and exit code 0",
+            "ASSUMED to VERIFIED without reproducible artifact"
+        ]
+    },
+    "claims": [],
+    "metadata": {
+        "total_claims": 0,
+        "last_updated_utc": null,
+        "current_git_head": null
+    }
+}

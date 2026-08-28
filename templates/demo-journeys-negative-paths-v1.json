@@ -1,0 +1,97 @@
+{
+    "schema_version": "demo-journeys-negative-paths-v1",
+    "project": "posthog.com",
+    "authoritative": false,
+    "purpose": "Catálogo estático de caminhos negativos, negações de autorização, limites de taxa e falhas parciais para validação adversarial 360° no PostHog.",
+    "total_negative_paths": 8,
+    "negative_paths": [
+        {
+            "id": "NP-001",
+            "name": "Negação de Autenticação (401 Unauthorized)",
+            "trigger": "Tentativa de acesso a rotas protegidas de projetos privados por ator não autenticado ('anonymous-visitor')",
+            "target_surface": "Projetos Privados & Dashboards Internos",
+            "expected_http_status": 401,
+            "expected_system_behavior": "Redirecionamento para tela de login com preservation de query params de retorno",
+            "mitigation_or_safety_rule": "Nenhum dado sensível de projeto é renderizado antes da validação da sessão.",
+            "visual_evidence_path": "reports/evidence/journeys/screenshots/np-001-unauthorized.png",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "NP-002",
+            "name": "Negação de Permissão RBAC (403 Forbidden)",
+            "trigger": "Tentativa de alteração de faturamento ou exclusão de projeto por persona sem privilégio de Admin ('demo-product-engineer' ou 'demo-support-specialist')",
+            "target_surface": "Configurações de Organização & Billing",
+            "expected_http_status": 403,
+            "expected_system_behavior": "Exibição de banner de acesso negado e botões de ação desabilitados com tooltip explicativo",
+            "mitigation_or_safety_rule": "Validação de autorização no servidor antes de qualquer mutação de estado.",
+            "visual_evidence_path": "reports/evidence/journeys/screenshots/np-002-forbidden.png",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "NP-003",
+            "name": "Limite de Quota e Rate Limiting (429 Too Many Requests)",
+            "trigger": "Envio massivo de eventos pelo SDK cliente excedendo os limites de burst configurados",
+            "target_surface": "API de Ingestão de Eventos (/e/)",
+            "expected_http_status": 429,
+            "expected_system_behavior": "Resposta HTTP 429 com cabeçalho 'Retry-After'; SDK retém eventos no buffer local com backoff exponencial",
+            "mitigation_or_safety_rule": "Proteção do cluster ClickHouse contra sobrecarga e tempestades de requisições.",
+            "visual_evidence_path": "reports/evidence/journeys/screenshots/np-003-rate-limited.png",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "NP-004",
+            "name": "Erro de Sintaxe / Schema Inválido (400 Bad Request)",
+            "trigger": "Execução de query HogQL com erros de gramática ou envio de evento sem distinct_id obrigatório",
+            "target_surface": "HogQL SQL Explorer (/sql)",
+            "expected_http_status": 400,
+            "expected_system_behavior": "Destaque do erro com número de linha e coluna exatos no editor e mensagem descritiva",
+            "mitigation_or_safety_rule": "Feedback imediato na interface impedindo travamento do backend.",
+            "visual_evidence_path": "reports/evidence/journeys/screenshots/np-004-bad-request.png",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "NP-005",
+            "name": "Timeout de Conexão Externa (504 Gateway Timeout)",
+            "trigger": "Consulta a banco de dados externo ou conector S3 com tempo de resposta superior a 30s",
+            "target_surface": "Data Warehouse Conectores (/data-warehouse)",
+            "expected_http_status": 504,
+            "expected_system_behavior": "Card de aviso amigável indicando timeout da fonte externa com botão 'Tentar Novamente'",
+            "mitigation_or_safety_rule": "Circuit breaker ativo para evitar esgotamento de conexões.",
+            "visual_evidence_path": "reports/evidence/journeys/screenshots/np-005-timeout.png",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "NP-006",
+            "name": "Interceptação e Mascaramento de PII (Privacy Guard)",
+            "trigger": "Detecção de números de cartão de crédito, senhas ou CPFs em inputs de formulário no Session Replay",
+            "target_surface": "Session Replay & Ingestão",
+            "expected_http_status": 200,
+            "expected_system_behavior": "Substituição automática do texto sensível por asteriscos '***' ou máscaras antes da gravação",
+            "mitigation_or_safety_rule": "Garantia estrita de conformidade com GDPR, LGPD e PCI-DSS.",
+            "visual_evidence_path": "reports/evidence/journeys/screenshots/np-006-pii-masking.png",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "NP-007",
+            "name": "Fallback Seguro de Feature Flags (Offline Resilience)",
+            "trigger": "Falha temporária de rede durante a chamada do SDK ao endpoint /decide/",
+            "target_surface": "SDK Cliente / Feature Flags",
+            "expected_http_status": 0,
+            "expected_system_behavior": "O SDK assume o valor padrão seguro (fallback) configurado no código sem quebrar a UI",
+            "mitigation_or_safety_rule": "Disponibilidade contínua da aplicação cliente mesmo sob falha do serviço de flags.",
+            "visual_evidence_path": "reports/evidence/journeys/screenshots/np-007-flag-fallback.png",
+            "execution_status": "NOT_EXECUTED"
+        },
+        {
+            "id": "NP-008",
+            "name": "Bloqueio de Mutação Autônoma não Autorizada (HITL Gate)",
+            "trigger": "Tentativa de um agente MCP de executar exclusão de dados ou mutação destrutiva sem confirmação humana",
+            "target_surface": "PostHog MCP Server (/docs/cdp/surfaces/mcp)",
+            "expected_http_status": 403,
+            "expected_system_behavior": "Rejeição da ferramenta com emissão de solicitação explícita de aprovação humana (Human-in-the-Loop)",
+            "mitigation_or_safety_rule": "Prevenção contra ações autônomas destrutivas e alucinações de agentes de IA.",
+            "visual_evidence_path": "reports/evidence/journeys/screenshots/np-008-mcp-hitl-denial.png",
+            "execution_status": "NOT_EXECUTED"
+        }
+    ]
+}
